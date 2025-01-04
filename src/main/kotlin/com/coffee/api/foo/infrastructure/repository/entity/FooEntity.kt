@@ -12,5 +12,4 @@ data class FooEntity(
     var id: UUID,
 
     var value: String,
-
-    ) : BaseEntity()
+) : BaseEntity()

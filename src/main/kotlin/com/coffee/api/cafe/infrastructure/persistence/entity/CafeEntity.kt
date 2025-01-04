@@ -1,4 +1,14 @@
-package com.coffee.api.cafe.infrastructure.repository.entity
+package com.coffee.api.cafe.infrastructure.persistence.entity
 
-class CafeEntity {
-}
+import com.coffee.api.common.infrastructure.BaseEntity
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import java.util.*
+
+@Entity
+class CafeEntity (
+    @Id
+    var id: UUID,
+
+    var value: String,
+) : BaseEntity()
