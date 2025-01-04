@@ -1,4 +1,4 @@
-package com.coffee.api.common.infrastructure
+package com.coffee.api.common.infrastructure.persistence
 
 import com.coffee.api.common.domain.BaseDomain
 import kotlin.reflect.KClass

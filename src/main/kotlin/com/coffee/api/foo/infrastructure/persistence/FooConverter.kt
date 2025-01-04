@@ -1,8 +1,8 @@
-package com.coffee.api.foo.infrastructure.repository
+package com.coffee.api.foo.infrastructure.persistence
 
+import com.coffee.api.common.infrastructure.persistence.DomainEntityConverter
 import com.coffee.api.foo.domain.Foo
-import com.coffee.api.foo.infrastructure.repository.entity.FooEntity
-import com.coffee.api.common.infrastructure.DomainEntityConverter
+import com.coffee.api.foo.infrastructure.persistence.entity.FooEntity
 import org.springframework.stereotype.Component
 
 @Component

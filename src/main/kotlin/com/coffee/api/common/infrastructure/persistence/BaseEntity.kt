@@ -1,4 +1,4 @@
-package com.coffee.api.common.infrastructure
+package com.coffee.api.common.infrastructure.persistence
 
 import jakarta.persistence.MappedSuperclass
 import org.hibernate.annotations.CreationTimestamp
