@@ -2,7 +2,7 @@ package com.coffee.api.foo.infrastructure.repository
 
 import com.coffee.api.foo.domain.Foo
 import com.coffee.api.foo.infrastructure.repository.entity.FooEntity
-import com.coffee.mysql.support.DomainEntityConverter
+import com.coffee.api.common.infrastructure.DomainEntityConverter
 import org.springframework.stereotype.Component
 
 @Component
