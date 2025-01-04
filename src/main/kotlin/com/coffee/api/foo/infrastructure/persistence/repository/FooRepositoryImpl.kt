@@ -1,10 +1,10 @@
-package com.coffee.api.foo.infrastructure.repository.repository
+package com.coffee.api.foo.infrastructure.persistence.repository
 
 import com.coffee.api.foo.application.repository.FooRepository
 import com.coffee.api.foo.domain.Foo
-import com.coffee.api.foo.infrastructure.repository.FooConverter
+import com.coffee.api.foo.infrastructure.persistence.FooConverter
 import org.springframework.stereotype.Repository
-import java.util.UUID
+import java.util.*
 
 @Repository
 class FooRepositoryImpl(

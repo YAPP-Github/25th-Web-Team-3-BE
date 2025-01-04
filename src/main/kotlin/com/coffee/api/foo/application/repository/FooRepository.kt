@@ -1,7 +1,7 @@
 package com.coffee.api.foo.application.repository
 
 import com.coffee.api.foo.domain.Foo
-import java.util.UUID
+import java.util.*
 
 // TODO : repository 반환타입 제한(Domain)
 interface FooRepository {

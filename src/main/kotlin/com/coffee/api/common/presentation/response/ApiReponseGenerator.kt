@@ -1,4 +1,4 @@
-package com.coffee.api.common.response
+package com.coffee.api.common.presentation.response
 
 import org.springframework.http.HttpStatus
 
