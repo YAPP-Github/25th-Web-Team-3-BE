@@ -10,11 +10,17 @@ class CafeConverter : DomainEntityConverter<Cafe, CafeEntity>(
     Cafe::class,
     CafeEntity::class,
 ) {
-    override fun toEntity(domain: Cafe): CafeEntity {
-        TODO("Not yet implemented")
+    override fun toDomain(entity: CafeEntity): Cafe {
+        return Cafe(
+            id = entity.id,
+            value = entity.value,
+        )
     }
 
-    override fun toDomain(entity: CafeEntity): Cafe {
-        TODO("Not yet implemented")
+    override fun toEntity(domain: Cafe): CafeEntity {
+        return CafeEntity(
+            id = domain.id.value,
+            value = domain.value,
+        )
     }
 }
