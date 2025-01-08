@@ -50,6 +50,11 @@ dependencies {
 
     // docs
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+
+    // jdsl
+    implementation("com.linecorp.kotlin-jdsl:jpql-dsl:3.5.4")
+    implementation("com.linecorp.kotlin-jdsl:jpql-render:3.5.4")
+    implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter-jakarta:2.2.1.RELEASE")
 }
 
 kotlin {
