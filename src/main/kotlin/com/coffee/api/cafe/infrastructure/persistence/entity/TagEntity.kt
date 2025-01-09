@@ -1,10 +1,7 @@
 package com.coffee.api.cafe.infrastructure.persistence.entity
 
 import com.coffee.api.common.infrastructure.persistence.BaseEntity
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import java.util.UUID
 
 @Entity
@@ -15,4 +12,9 @@ class TagEntity(
 
     @Column(nullable = false, unique = true)
     var name: String,
-) : BaseEntity()
+) : BaseEntity() {
+
+    @OneToMany
+    var cafeTags: MutableList<CafeTagEntity> = mutableListOf()
+        protected set
+}

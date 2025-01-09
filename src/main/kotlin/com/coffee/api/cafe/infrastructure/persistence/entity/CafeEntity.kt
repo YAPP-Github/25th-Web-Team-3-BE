@@ -6,7 +6,7 @@ import java.util.UUID
 
 @Entity
 @Table(name = "cafes")
-class CafeEntity (
+class CafeEntity(
     @Id
     var id: UUID,
 
@@ -27,4 +27,17 @@ class CafeEntity (
 
     @Column(name = "main_images")
     var mainImages: String,
-) : BaseEntity()
+) : BaseEntity() {
+
+    @OneToMany
+    var cafeTags: MutableList<CafeTagEntity> = mutableListOf()
+        protected set
+
+    @OneToMany
+    var coffeeBeans: MutableList<CoffeeBeanEntity> = mutableListOf()
+        protected set
+
+    @OneToMany
+    var menus: MutableList<MenuEntity> = mutableListOf()
+        protected set
+}
