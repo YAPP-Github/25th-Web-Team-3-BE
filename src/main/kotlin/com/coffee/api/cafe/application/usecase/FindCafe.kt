@@ -10,6 +10,7 @@ interface FindCafe : QueryUseCase<FindCafe.Query, FindCafe.Result> {
     ) : QueryUseCase.Query
 
     data class Result(
-        val result: List<Cafe>
+        val result: List<Cafe>,
+        val hasNext: Boolean
     ) : QueryUseCase.Result
 }
