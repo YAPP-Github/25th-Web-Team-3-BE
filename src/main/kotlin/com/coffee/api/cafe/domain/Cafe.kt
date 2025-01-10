@@ -7,15 +7,43 @@ import java.util.*
 
 class Cafe private constructor(
     override val id: Id,
-    val value: String
+    val name: String,
+    val nearestStation: String,
+    val location: String,
+    val price: Int,
+    val previewImages: String?,
+    val mainImages: String?,
 ) : AbstractDomain<Cafe, Cafe.Id>() {
     companion object {
         @JsonCreator
-        fun create(id: UUID, value: String): Cafe {
-            return Cafe(id = UUIDTypeId.from(id), value = value)
+        fun create(id: UUID,
+                   name: String,
+                   nearestStation: String,
+                   location: String,
+                   price: Int,
+                   previewImages: String?,
+                   mainImages: String?
+        ): Cafe {
+            return Cafe(
+                id = UUIDTypeId.from(id),
+                name = name,
+                nearestStation = nearestStation,
+                location = location,
+                price = price,
+                previewImages = previewImages,
+                mainImages = mainImages
+            )
         }
 
-        operator fun invoke(id: UUID, value: String): Cafe = Cafe.create(id, value)
+        operator fun invoke(
+            id: UUID,
+            name: String,
+            nearestStation: String,
+            location: String,
+            price: Int,
+            previewImages: String?,
+            mainImages: String?
+        ): Cafe = create(id, name, nearestStation, location, price, previewImages, mainImages)
     }
 
     data class Id(override val value: UUID) : UUIDTypeId(value)
