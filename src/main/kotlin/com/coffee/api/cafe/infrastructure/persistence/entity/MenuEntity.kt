@@ -1,27 +1,34 @@
 package com.coffee.api.cafe.infrastructure.persistence.entity
 
 import com.coffee.api.common.infrastructure.persistence.BaseEntity
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import java.util.UUID
 
 @Entity
-@Table(name = "menu")
+@Table(name = "menus")
 class MenuEntity(
+    id: UUID,
+    cafe: CafeEntity,
+    price: Int,
+    imageUrl: String,
+    description: String,
+) : BaseEntity() {
+
     @Id
-    var id: UUID,
+    var id: UUID = id
+        protected set
 
-    @Column(name = "cafe_id")
-    var cafeId: UUID,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cafe_id", foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
+    var cafe: CafeEntity = cafe
+        protected set
 
-    @Column(name = "price")
-    var price: Int,
+    var price: Int = price
+        protected set
 
-    @Column(name = "image_url")
-    var imageUrl: String,
+    var imageUrl: String = imageUrl
+        protected set
 
-    @Column(name = "description")
-    var description: String,
-) : BaseEntity()
+    var description: String = description
+        protected set
+}

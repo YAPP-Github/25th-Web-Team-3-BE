@@ -7,14 +7,15 @@ import java.util.UUID
 @Entity
 @Table(name = "tags")
 class TagEntity(
-    @Id
-    var id: UUID,
-
-    @Column(nullable = false, unique = true)
-    var name: String,
+    id: UUID,
+    name: String,
 ) : BaseEntity() {
 
-    @OneToMany
-    var cafeTags: MutableList<CafeTagEntity> = mutableListOf()
+    @Id
+    var id: UUID = id
+        protected set
+
+    @Column(nullable = false, unique = true)
+    var name: String = name
         protected set
 }

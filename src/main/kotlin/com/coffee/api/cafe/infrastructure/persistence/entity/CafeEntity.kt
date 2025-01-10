@@ -1,43 +1,44 @@
 package com.coffee.api.cafe.infrastructure.persistence.entity
 
 import com.coffee.api.common.infrastructure.persistence.BaseEntity
-import jakarta.persistence.*
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import jakarta.persistence.Table
 import java.util.UUID
 
 @Entity
 @Table(name = "cafes")
 class CafeEntity(
-    @Id
-    var id: UUID,
-
-    @Column(name = "name", nullable = false)
-    var name: String,
-
-    @Column(name = "nearest_station", nullable = false)
-    var nearestStation: String,
-
-    @Column(name = "location", nullable = false)
-    var location: String,
-
-    @Column(name = "price", nullable = false)
-    var price: Int,
-
-    @Column(name = "preview_images")
-    var previewImages: String,
-
-    @Column(name = "main_images")
-    var mainImages: String,
+    id: UUID,
+    name: String,
+    nearestStation: String,
+    location: String,
+    price: Int,
+    previewImages: String,
+    mainImages: String,
 ) : BaseEntity() {
 
-    @OneToMany
-    var cafeTags: MutableList<CafeTagEntity> = mutableListOf()
+    @Id
+    var id: UUID = id
         protected set
 
-    @OneToMany
-    var coffeeBeans: MutableList<CoffeeBeanEntity> = mutableListOf()
+    @Column(nullable = false)
+    var name: String = name
         protected set
 
-    @OneToMany
-    var menus: MutableList<MenuEntity> = mutableListOf()
+    var nearestStation: String = nearestStation
+        protected set
+
+    var location: String = location
+        protected set
+
+    var price: Int = price
+        protected set
+
+    var previewImages: String = previewImages
+        protected set
+
+    var mainImages: String = mainImages
         protected set
 }

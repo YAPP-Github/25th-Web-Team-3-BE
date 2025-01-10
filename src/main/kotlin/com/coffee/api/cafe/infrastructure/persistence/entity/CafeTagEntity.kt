@@ -1,15 +1,28 @@
 package com.coffee.api.cafe.infrastructure.persistence.entity
 
 import com.coffee.api.common.infrastructure.persistence.BaseEntity
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import java.util.UUID
 
 @Entity
-@Table(name = "cafe_tag")
+@Table(name = "cafe_tags")
 class CafeTagEntity(
-    @Id
-    var id: UUID,
+    id: UUID,
+    cafe: CafeEntity,
+    tags: TagEntity
+) : BaseEntity() {
 
-) : BaseEntity()
+    @Id
+    var id: UUID = id
+        protected set
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cafe_id", foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
+    var cafe: CafeEntity = cafe
+        protected set
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tag_id", foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
+    var tags: TagEntity = tags
+        protected set
+}

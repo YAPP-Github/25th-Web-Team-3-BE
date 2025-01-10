@@ -7,28 +7,40 @@ import jakarta.persistence.*
 import java.util.*
 
 @Entity
-@Table(name = "coffee_bean")
+@Table(name = "coffee_beans")
 class CoffeeBeanEntity(
+    id: UUID,
+    cafe: CafeEntity,
+    name: String,
+    imageUrl: String,
+    flavor: Flavor,
+    countryOfOrigin: String,
+    roastingPoint: RoastingPoint,
+) : BaseEntity() {
+
     @Id
-    var id: UUID,
+    var id: UUID = id
+        protected set
 
-    @Column(name = "cafe_id", nullable = false)
-    var cafeId: UUID,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cafe_id", foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
+    var cafe: CafeEntity = cafe
+        protected set
 
-    @Column(name = "name", nullable = false)
-    var name: String,
+    var name: String = name
+        protected set
 
-    @Column(name = "image_url", nullable = false)
-    var imageUrl: String,
+    var imageUrl: String = imageUrl
+        protected set
 
-    @Column(name = "flavor", nullable = false)
     @Enumerated(EnumType.STRING)
-    var flavor: Flavor,
+    var flavor: Flavor = flavor
+        protected set
 
-    @Column(name = "country_of_origin", nullable = false)
-    var countryOfOrigin: String,
+    var countryOfOrigin: String = countryOfOrigin
+        protected set
 
-    @Column(name = "roasting_point", nullable = false)
     @Enumerated(EnumType.STRING)
-    var roastingPoint: RoastingPoint,
-) : BaseEntity()
+    var roastingPoint: RoastingPoint = roastingPoint
+        protected set
+}
