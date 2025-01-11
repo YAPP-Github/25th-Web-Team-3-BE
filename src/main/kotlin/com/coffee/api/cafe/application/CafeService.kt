@@ -10,8 +10,9 @@ import org.springframework.transaction.annotation.Transactional
 class CafeService(
     private val cafeRepository: CafeRepository,
 ) : FindCafe {
+
     override fun execute(input: FindCafe.Query): FindCafe.Result {
-        val findAll = cafeRepository.findAll()
-        return FindCafe.Result(findAll);
+        val findAllCafesById = cafeRepository.findAllCafesById(input.lastCafeId, 5)
+        return FindCafe.Result(findAllCafesById.cafes, findAllCafesById.hasNext)
     }
 }

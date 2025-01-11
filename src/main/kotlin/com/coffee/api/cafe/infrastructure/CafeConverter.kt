@@ -13,14 +13,24 @@ class CafeConverter : DomainEntityConverter<Cafe, CafeEntity>(
     override fun toDomain(entity: CafeEntity): Cafe {
         return Cafe(
             id = entity.id,
-            value = entity.value,
+            name = entity.name,
+            nearestStation = entity.nearestStation,
+            location = entity.location,
+            price = entity.price,
+            previewImages = entity.previewImages,
+            mainImages = entity.mainImages
         )
     }
 
     override fun toEntity(domain: Cafe): CafeEntity {
         return CafeEntity(
             id = domain.id.value,
-            value = domain.value,
+            name = domain.name,
+            nearestStation = domain.nearestStation,
+            location = domain.location,
+            price = domain.price,
+            previewImages = domain.previewImages ?: "",
+            mainImages = domain.mainImages ?: ""
         )
     }
 }
