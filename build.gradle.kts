@@ -5,15 +5,15 @@ allOpen {
 }
 
 plugins {
-    kotlin("jvm") version "1.9.25"
-    kotlin("plugin.spring") version "1.9.25"
-    kotlin("plugin.jpa") version "1.9.25"
-    id("org.springframework.boot") version "3.4.1"
-    id("io.spring.dependency-management") version "1.1.7"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.25"
-    id("org.jetbrains.kotlin.plugin.noarg") version "1.9.25"
-    id("org.openapi.generator") version "6.5.0"
-    id("com.diffplug.eclipse.apt") version "3.26.0"
+    kotlin("jvm") version Plugin.KOTLIN_JVM.version
+    kotlin("plugin.spring") version Plugin.KOTLIN_SPRING.version
+    kotlin("plugin.jpa") version Plugin.KOTLIN_JPA.version
+    id(Plugin.SPRING_BOOT.id) version Plugin.SPRING_BOOT.version
+    id(Plugin.SPRING_DEPENDENCY_MANAGEMENT.id) version Plugin.SPRING_DEPENDENCY_MANAGEMENT.version
+    id(Plugin.KOTLIN_ALLOPEN.id) version Plugin.KOTLIN_ALLOPEN.version
+    id(Plugin.KOTLIN_NOARG.id) version Plugin.KOTLIN_NOARG.version
+    id(Plugin.OPENAPI.id) version Plugin.OPENAPI.version
+    id(Plugin.ECLIPSE_APT.id) version Plugin.ECLIPSE_APT.version
 }
 
 group = "com.coffee"
@@ -29,26 +29,28 @@ repositories {
 }
 
 dependencies {
-    // spring
-    implementation("org.springframework.boot:spring-boot-starter")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    // web
-    implementation ("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-web")
+    // Spring
+    implementation(Dependency.Spring.BOOT_STARTER)
+    implementation(Dependency.Spring.BOOT_STARTER_VALIDATION)
+    implementation(Dependency.Spring.BOOT_STARTER_WEB)
+    implementation(Dependency.Spring.BOOT_STARTER_JPA)
+    testImplementation(Dependency.Spring.BOOT_STARTER_TEST)
 
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    // Kotlin
+    implementation(Dependency.Kotlin.REFLECT)
+    testImplementation(Dependency.Kotlin.TEST_JUNIT5)
 
-    // persistence
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    // database
-    runtimeOnly("com.mysql:mysql-connector-j")
-    // util
-    implementation("com.github.f4b6a3:uuid-creator:5.3.5")
+    // Test
+    testRuntimeOnly(Dependency.Test.JUNIT_PLATFORM)
 
-    // docs
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+    // Database
+    runtimeOnly(Dependency.Database.MYSQL_CONNECTOR)
+
+    // Util
+    implementation(Dependency.Util.UUID_CREATOR)
+
+    // Docs
+    implementation(Dependency.Spring.SPRINGDOC)
 }
 
 kotlin {
