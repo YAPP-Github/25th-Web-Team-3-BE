@@ -1,9 +1,3 @@
-allOpen {
-    annotation("jakarta.persistence.Entity")
-    annotation("jakarta.persistence.MappedSuperclass")
-    annotation("jakarta.persistence.Embeddable")
-}
-
 plugins {
     kotlin("jvm") version Plugin.KOTLIN_JVM.version
     kotlin("plugin.spring") version Plugin.KOTLIN_SPRING.version
@@ -14,6 +8,12 @@ plugins {
     id(Plugin.KOTLIN_NOARG.id) version Plugin.KOTLIN_NOARG.version
     id(Plugin.OPENAPI.id) version Plugin.OPENAPI.version
     id(Plugin.ECLIPSE_APT.id) version Plugin.ECLIPSE_APT.version
+}
+
+allOpen {
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.MappedSuperclass")
+    annotation("jakarta.persistence.Embeddable")
 }
 
 group = "com.coffee"
@@ -51,6 +51,11 @@ dependencies {
 
     // Docs
     implementation(Dependency.Spring.SPRINGDOC)
+
+    // JDSL
+    implementation(Dependency.JDSL.JPQL_DSL)
+    implementation(Dependency.JDSL.JPQL_RENDER)
+    implementation(Dependency.JDSL.SPRING_DATA_STARTER)
 }
 
 kotlin {
