@@ -25,6 +25,5 @@ class Foo private constructor(
         operator fun invoke(id: UUID, value: String): Foo = create(id, value)
     }
 
-
     data class Id(override val value: UUID) : UUIDTypeId(value)
 }

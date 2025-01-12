@@ -5,6 +5,6 @@ import com.coffee.api.cafe.domain.CafePage
 import java.util.*
 
 interface CafeRepository {
-    fun findAll() : List<Cafe>
+    fun findAll(): List<Cafe>
     fun findAllCafesById(cafeId: UUID?, limit: Int): CafePage
 }

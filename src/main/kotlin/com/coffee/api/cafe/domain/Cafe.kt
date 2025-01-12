@@ -16,13 +16,14 @@ class Cafe private constructor(
 ) : AbstractDomain<Cafe, Cafe.Id>() {
     companion object {
         @JsonCreator
-        fun create(id: UUID,
-                   name: String,
-                   nearestStation: String,
-                   location: String,
-                   price: Int,
-                   previewImages: String?,
-                   mainImages: String?
+        fun create(
+            id: UUID,
+            name: String,
+            nearestStation: String,
+            location: String,
+            price: Int,
+            previewImages: String?,
+            mainImages: String?,
         ): Cafe {
             return Cafe(
                 id = UUIDTypeId.from(id),
@@ -31,7 +32,7 @@ class Cafe private constructor(
                 location = location,
                 price = price,
                 previewImages = previewImages,
-                mainImages = mainImages
+                mainImages = mainImages,
             )
         }
 
@@ -42,7 +43,7 @@ class Cafe private constructor(
             location: String,
             price: Int,
             previewImages: String?,
-            mainImages: String?
+            mainImages: String?,
         ): Cafe = create(id, name, nearestStation, location, price, previewImages, mainImages)
     }
 

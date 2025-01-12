@@ -6,5 +6,5 @@ enum class Flavor(
 
     FLORAL("플로럴"),
     ALMOND("아몬드"),
-    CITRUS("시트러스");
+    CITRUS("시트러스"),
 }

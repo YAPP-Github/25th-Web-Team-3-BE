@@ -12,4 +12,4 @@ data class FooEntity(
 
     var value: String,
 
-    ) : BaseEntity()
+) : BaseEntity()

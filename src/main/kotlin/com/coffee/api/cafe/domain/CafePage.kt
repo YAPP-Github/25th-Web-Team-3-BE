@@ -10,7 +10,7 @@ class CafePage(
         fun from(slice: Slice<Cafe>): CafePage {
             return CafePage(
                 cafes = slice.content,
-                hasNext = slice.hasNext()
+                hasNext = slice.hasNext(),
             )
         }
     }

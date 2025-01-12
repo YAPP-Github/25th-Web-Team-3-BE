@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @EnableWebMvc
 class WebMvcConfig(
     @Value("\${cors.allow-origin.urls}")
-    private val allowOriginUrlPatterns: String
+    private val allowOriginUrlPatterns: String,
 ) : WebMvcConfigurer {
 
     private val allowOriginUrls: List<String> = allowOriginUrlPatterns

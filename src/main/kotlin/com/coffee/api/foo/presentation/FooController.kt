@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 @Hidden
 @RestController
 class FooController(
-    val createFoo: CreateFoo
+    val createFoo: CreateFoo,
 ) {
     @PostMapping("/foo")
     fun save(

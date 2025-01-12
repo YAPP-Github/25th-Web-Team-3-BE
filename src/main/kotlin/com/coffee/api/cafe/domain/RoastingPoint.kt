@@ -6,5 +6,5 @@ enum class RoastingPoint(
 
     LIGHT("라이트"),
     MEDIUM("미디움"),
-    DARK("다크");
+    DARK("다크"),
 }

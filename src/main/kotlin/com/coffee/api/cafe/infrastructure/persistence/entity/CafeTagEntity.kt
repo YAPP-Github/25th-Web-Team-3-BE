@@ -9,7 +9,7 @@ import java.util.UUID
 class CafeTagEntity(
     id: UUID,
     cafe: CafeEntity,
-    tags: TagEntity
+    tags: TagEntity,
 ) : BaseEntity() {
 
     @Id
