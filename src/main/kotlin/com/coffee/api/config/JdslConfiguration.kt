@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class JdslConfiguration(
     @PersistenceContext
-    private val entityManager: EntityManager
+    private val entityManager: EntityManager,
 ) {
 
     @Bean
@@ -20,7 +20,7 @@ class JdslConfiguration(
         return SpringDataQueryFactoryImpl(
             criteriaQueryCreator =
                 CriteriaQueryCreatorImpl(entityManager),
-            subqueryCreator = SubqueryCreatorImpl()
+            subqueryCreator = SubqueryCreatorImpl(),
         )
     }
 }

@@ -17,7 +17,7 @@ import java.util.*
 class CafeRepositoryImpl(
     private val queryFactory: SpringDataQueryFactory,
     private val cafeJpaRepository: CafeJpaRepository,
-    private val converter: CafeConverter
+    private val converter: CafeConverter,
 ) : CafeRepository {
     override fun findAll(): List<Cafe> {
         return cafeJpaRepository.findAll()
@@ -29,7 +29,7 @@ class CafeRepositoryImpl(
             select(entity(CafeEntity::class))
             from(entity(CafeEntity::class))
             whereAnd(
-                lastCafeId?.let { column(CafeEntity::id).greaterThan(it) }
+                lastCafeId?.let { column(CafeEntity::id).greaterThan(it) },
             )
             orderBy(column(CafeEntity::id).asc())
             limit(limit + 1)

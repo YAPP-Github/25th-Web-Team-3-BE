@@ -5,7 +5,7 @@ import com.coffee.api.foo.domain.Foo
 
 interface CreateFoo : CommandUseCase<CreateFoo.Command, CreateFoo.Result> {
     data class Command(
-        val value: String
+        val value: String,
     ) : CommandUseCase.Command
 
     data class Result(

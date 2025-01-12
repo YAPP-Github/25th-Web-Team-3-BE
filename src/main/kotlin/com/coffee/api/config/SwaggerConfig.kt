@@ -16,7 +16,7 @@ class SwaggerConfig {
                     Info()
                         .version("v.0.0.1")
                         .title("Code Brew 팀의 API 문서")
-                        .description("API DOC")
+                        .description("API DOC"),
                 )
         }
     }

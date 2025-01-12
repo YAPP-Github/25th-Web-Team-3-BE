@@ -4,9 +4,6 @@ import com.coffee.api.cafe.application.usecase.FindCafe
 import com.coffee.api.cafe.presentation.docs.CafeApi
 import com.coffee.api.common.presentation.response.ApiResponse
 import com.coffee.api.common.presentation.response.ApiResponseGenerator
-import io.swagger.v3.oas.annotations.Operation
-import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -18,11 +15,11 @@ import java.util.UUID
 @RequestMapping("/api/v1/cafes")
 class CafeController(
     val findCafe: FindCafe,
-): CafeApi {
+) : CafeApi {
 
     @GetMapping
     override fun findAllCafes(
-        @RequestParam(value = "lastCafeId", required = false) lastCafeId: UUID?
+        @RequestParam(value = "lastCafeId", required = false) lastCafeId: UUID?,
     ): ApiResponse<ApiResponse.SuccessBody<FindCafe.Result?>> {
         val result = findCafe.execute(FindCafe.Query(lastCafeId))
         return ApiResponseGenerator.success(data = result, HttpStatus.OK)
