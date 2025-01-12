@@ -53,6 +53,6 @@ object Dependency {
 
         val JPQL_DSL = "$BASE:jpql-dsl:$JDSL_CORE_VERSION"
         val JPQL_RENDER = "$BASE:jpql-render:$JDSL_CORE_VERSION"
-        val SPRING_DATA_STARTER = "$BASE:spring-data-kotlin-jdsl-starter:$JDSL_VERSION"
+        val SPRING_DATA_STARTER = "$BASE:spring-data-kotlin-jdsl-starter-jakarta:$JDSL_VERSION"
     }
 }
