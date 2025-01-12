@@ -7,6 +7,7 @@ enum class Plugin(
     KOTLIN_JPA("org.jetbrains.kotlin.plugin.jpa", "1.9.25"),
     KOTLIN_ALLOPEN("org.jetbrains.kotlin.plugin.allopen", "1.9.25"),
     KOTLIN_NOARG("org.jetbrains.kotlin.plugin.noarg", "1.9.25"),
+    KTLINT("org.jmailen.kotlinter", "3.16.0"),
 
     SPRING_BOOT("org.springframework.boot", "3.4.1"),
     SPRING_DEPENDENCY_MANAGEMENT("io.spring.dependency-management", "1.1.7"),

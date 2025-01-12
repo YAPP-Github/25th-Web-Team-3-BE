@@ -1,0 +1,38 @@
+name: lint
+
+on:
+  push:
+    branches: [ main, develop, feature/** ]
+  pull_request:
+    branches: [ main, develop, feature/** ]
+
+jobs:
+  lint:
+    name: Lint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run Ktlint check
+        run: ./gradlew ktlintCheck
+
+      - name: Upload Ktlint report
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: ktlint-report
+          path: |
+            **/build/reports/ktlint/
+            **/build/reports/ktlint-results.xml

@@ -8,6 +8,7 @@ plugins {
     id(Plugin.KOTLIN_NOARG.id) version Plugin.KOTLIN_NOARG.version
     id(Plugin.OPENAPI.id) version Plugin.OPENAPI.version
     id(Plugin.ECLIPSE_APT.id) version Plugin.ECLIPSE_APT.version
+    id(Plugin.KTLINT.id) version Plugin.KTLINT.version
 }
 
 allOpen {
