@@ -47,12 +47,12 @@ object Dependency {
     }
 
     object JDSL {
-        private const val JDSL_VERSION = "3.5.4"
-        private const val JDSL_STARTER_VERSION = "2.2.1.RELEASE"
+        private const val JDSL_VERSION = "2.2.1.RELEASE"
+        private const val JDSL_CORE_VERSION = "3.5.4"
         private const val BASE = "com.linecorp.kotlin-jdsl"
 
-        val JPQL_DSL = "$BASE:jpql-dsl:$JDSL_VERSION"
-        val JPQL_RENDER = "$BASE:jpql-render:$JDSL_VERSION"
-        val SPRING_DATA_STARTER = "$BASE:spring-data-kotlin-jdsl-starter-jakarta:$JDSL_STARTER_VERSION"
+        val JPQL_DSL = "$BASE:jpql-dsl:$JDSL_CORE_VERSION"
+        val JPQL_RENDER = "$BASE:jpql-render:$JDSL_CORE_VERSION"
+        val SPRING_DATA_STARTER = "$BASE:spring-data-kotlin-jdsl-starter:$JDSL_VERSION"
     }
 }
