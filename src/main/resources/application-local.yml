@@ -14,3 +14,7 @@ spring:
     url: jdbc:mysql://localhost:13306/api?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=Asia/Seoul
     username: root
     password: root
+
+cors:
+  allow-origin:
+    urls: http://localhost:3000
