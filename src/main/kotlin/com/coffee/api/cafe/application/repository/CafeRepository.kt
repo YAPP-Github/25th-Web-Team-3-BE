@@ -6,5 +6,5 @@ import java.util.*
 
 interface CafeRepository {
     fun findAll(): List<Cafe>
-    fun findAllCafesById(cafeId: UUID?, limit: Int): CafePage
+    fun findAllCafesById(lastCafeId: UUID?, limit: Int): CafePage
 }
