@@ -24,7 +24,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run Ktlint check
-        run: ./gradlew ktlintCheck
+        run: ./gradlew lintKotlin
 
       - name: Upload Ktlint report
         if: failure()
