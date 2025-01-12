@@ -4,11 +4,13 @@ import com.coffee.api.common.presentation.response.ApiResponse
 import com.coffee.api.common.presentation.response.ApiResponseGenerator
 import com.coffee.api.foo.application.usecase.CreateFoo
 import com.coffee.api.foo.presentation.request.SaveFooRequest
+import io.swagger.v3.oas.annotations.Hidden
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
+@Hidden
 @RestController
 class FooController(
     val createFoo: CreateFoo
