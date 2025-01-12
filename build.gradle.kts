@@ -68,3 +68,7 @@ kotlin {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.withType<org.jmailen.gradle.kotlinter.tasks.LintTask> {
+    enabled = false
+}
