@@ -27,7 +27,7 @@ class CafeController(
         return ApiResponseGenerator.success(data = result, HttpStatus.OK)
     }
 
-    @GetMapping("/cafeId")
+    @GetMapping("/{cafeId}")
     override fun getCafeDetails(
         @PathVariable cafeId: UUID,
         ): ApiResponse<ApiResponse.SuccessBody<FindCafeDetails.Result?>> {
