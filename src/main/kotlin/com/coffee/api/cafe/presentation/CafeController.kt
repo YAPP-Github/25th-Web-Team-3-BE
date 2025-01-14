@@ -17,6 +17,7 @@ import java.util.UUID
 @RequestMapping("/api/v1/cafes")
 class CafeController(
     val findCafe: FindCafe,
+    val findCafeDetails: FindCafeDetails,
 ) : CafeApi {
 
     @GetMapping
@@ -31,6 +32,7 @@ class CafeController(
     override fun getCafeDetails(
         @PathVariable cafeId: UUID,
         ): ApiResponse<ApiResponse.SuccessBody<FindCafeDetails.Result?>> {
-        TODO("Not yet implemented")
+        val result = findCafeDetails.execute(FindCafeDetails.Query(cafeId))
+        return ApiResponseGenerator.success(data = result, HttpStatus.OK)
     }
 }
