@@ -14,11 +14,11 @@ class CafeDetails private constructor(
     companion object {
         fun of(cafe: Cafe, coffeeBean: CoffeeBean, menu: List<Menu>, tag: List<Tag>, updatedAt: LocalDateTime): CafeDetails {
             return CafeDetails(
-                cafe,
-                coffeeBean,
-                menu.toList(),
-                tag.toList(),
-                updatedAt
+                cafe = cafe,
+                coffeeBean = coffeeBean,
+                menu = menu.toList(),
+                tag = tag.toList(),
+                updatedAt = updatedAt
             )
         }
     }
