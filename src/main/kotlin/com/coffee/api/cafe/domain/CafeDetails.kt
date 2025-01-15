@@ -16,8 +16,8 @@ class CafeDetails private constructor(
             return CafeDetails(
                 cafe,
                 coffeeBean,
-                menu,
-                tag,
+                menu.toList(),
+                tag.toList(),
                 updatedAt
             )
         }
