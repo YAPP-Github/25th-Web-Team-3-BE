@@ -10,17 +10,14 @@ import com.coffee.api.cafe.infrastructure.persistence.entity.*
 import com.linecorp.kotlinjdsl.dsl.jpql.jpql
 import com.linecorp.kotlinjdsl.render.jpql.JpqlRenderContext
 import com.linecorp.kotlinjdsl.support.spring.data.jpa.extension.createQuery
-import com.linecorp.kotlinjdsl.support.spring.data.jpa.repository.KotlinJdslJpqlExecutor
 import jakarta.persistence.EntityManager
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.SliceImpl
 import org.springframework.stereotype.Repository
-import org.springframework.transaction.annotation.Transactional
-import java.util.*
+import java.util.UUID
 
 @Repository
 class CafeRepositoryImpl(
-    private val kotlinJdslJpqlExecutor: KotlinJdslJpqlExecutor,
     private val cafeJpaRepository: CafeJpaRepository,
     private val cafeConverter: CafeConverter,
     private val coffeeBeanConverter: CoffeeBeanConverter,
@@ -93,7 +90,7 @@ class CafeRepositoryImpl(
             .resultList
             .firstOrNull()
             ?.let { coffeeBeanConverter.toDomain(it) }
-            ?: throw IllegalArgumentException()
+            ?: throw IllegalArgumentException("CoffeeBean not found for cafe: $cafeId")
 
         // 메뉴 조회
         val menus = getMenusForCafe(cafeEntity)
