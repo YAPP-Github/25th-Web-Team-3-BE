@@ -119,9 +119,9 @@ class CafeRepositoryImpl(
             select(entity(TagEntity::class))
                 .from(
                     entity(CafeTagEntity::class),
-                    leftJoin(CafeEntity::class)
+                    leftFetchJoin(CafeEntity::class)
                         .on(path(CafeTagEntity::cafe).eq(entity(CafeEntity::class))),
-                    leftJoin(TagEntity::class)
+                    leftFetchJoin(TagEntity::class)
                         .on(path(CafeTagEntity::tags).eq(entity(TagEntity::class)))
                 )
                 .where(path(CafeTagEntity::cafe).eq(cafeEntity))
