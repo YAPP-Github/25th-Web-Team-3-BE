@@ -37,7 +37,10 @@ class CafeRepositoryImpl(
             select(entity(CafeEntity::class))
                 .from(entity(CafeEntity::class))
                 .whereAnd(
-                    lastCafeId?.let { path(CafeEntity::id).greaterThan(it) }
+                    lastCafeId?.let {
+                        path(CafeEntity::id).greaterThan(it)
+                    },
+                    path(CafeEntity::deletedAt).isNull()
                 )
                 .orderBy(path(CafeEntity::id).asc())
         }
