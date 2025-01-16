@@ -7,17 +7,14 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class SwaggerConfig {
-    @Configuration
-    class SwaggerConfig {
-        @Bean
-        fun openApi(): OpenAPI {
-            return OpenAPI()
-                .info(
-                    Info()
-                        .version("v.0.0.1")
-                        .title("Code Brew 팀의 API 문서")
-                        .description("API DOC"),
-                )
-        }
+    @Bean
+    fun openApi(): OpenAPI {
+        return OpenAPI()
+            .info(
+                Info()
+                    .version("v.0.0.1")
+                    .title("Code Brew 팀의 API 문서")
+                    .description("API DOC"),
+            )
     }
 }

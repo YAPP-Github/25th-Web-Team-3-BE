@@ -3,8 +3,17 @@ package com.coffee.api.cafe.infrastructure.persistence.entity
 import com.coffee.api.cafe.domain.Flavor
 import com.coffee.api.cafe.domain.RoastingPoint
 import com.coffee.api.common.infrastructure.persistence.BaseEntity
-import jakarta.persistence.*
-import java.util.*
+import jakarta.persistence.ConstraintMode
+import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
+import jakarta.persistence.FetchType
+import jakarta.persistence.ForeignKey
+import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
+import jakarta.persistence.Table
+import java.util.UUID
 
 @Entity
 @Table(name = "coffee_beans")

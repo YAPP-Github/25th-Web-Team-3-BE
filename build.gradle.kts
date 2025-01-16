@@ -56,7 +56,7 @@ dependencies {
     // JDSL
     implementation(Dependency.JDSL.JPQL_DSL)
     implementation(Dependency.JDSL.JPQL_RENDER)
-    implementation(Dependency.JDSL.SPRING_DATA_STARTER)
+    implementation(Dependency.JDSL.SPRING_DATA_JPA_SUPPORTER)
 }
 
 kotlin {

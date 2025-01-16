@@ -1,3 +1,5 @@
 spring:
   application:
     name: coffee-api
+  profiles:
+    active: local
