@@ -7,7 +7,7 @@ import java.util.UUID
 
 interface FindCafeDetails : QueryUseCase<FindCafeDetails.Query, FindCafeDetails.Result> {
     data class Query(
-        val cafeId: UUID?,
+        val cafeId: UUID,
     ) : QueryUseCase.Query
 
     @Schema(name = "Find Cafe Details", description = "카페 상세 조회 데이터")
