@@ -36,6 +36,7 @@ dependencies {
     implementation(Dependency.Spring.BOOT_STARTER_WEB)
     implementation(Dependency.Spring.BOOT_STARTER_JPA)
     testImplementation(Dependency.Spring.BOOT_STARTER_TEST)
+    implementation(Dependency.Spring.BOOT_STARTER_ACTUATOR)
 
     // Kotlin
     implementation(Dependency.Kotlin.REFLECT)

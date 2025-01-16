@@ -11,6 +11,7 @@ object Dependency {
         val BOOT_STARTER_WEB = starter("-web")
         val BOOT_STARTER_VALIDATION = starter("-validation")
         val BOOT_STARTER_JPA = starter("-data-jpa")
+        val BOOT_STARTER_ACTUATOR = starter("-actuator")
         val SPRINGDOC = "org.springdoc:springdoc-openapi-starter-webmvc-ui:$SPRINGDOC_VERSION"
     }
 
