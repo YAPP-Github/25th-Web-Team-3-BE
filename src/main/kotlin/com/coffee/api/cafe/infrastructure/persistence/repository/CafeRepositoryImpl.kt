@@ -54,18 +54,6 @@ class CafeRepositoryImpl(
 
 
     override fun findByCafeId(cafeId: UUID?): CafeDetails {
-        // UpdatedAt 조회
-        val updatedAtQuery = jpql {
-            select(path(CafeEntity::updatedAt))
-                .from(entity(CafeEntity::class))
-                .where(path(CafeEntity::id).eq(cafeId))
-        }
-        val updatedAt = entityManager
-            .createQuery(updatedAtQuery, jpqlRenderContext)
-            .resultList
-            .firstOrNull()
-            ?: throw IllegalArgumentException("Cafe not found for id: $cafeId")
-
         // CafeEntity 조회
         val cafeQuery = jpql {
             select(entity(CafeEntity::class))
@@ -78,6 +66,9 @@ class CafeRepositoryImpl(
             .firstOrNull()
             ?: throw IllegalArgumentException("Cafe not found for id: $cafeId")
         val cafe = cafeConverter.toDomain(cafeEntity)
+
+        // updatedAt 조회
+        val updatedAt = cafeEntity.updatedAt
 
         // CoffeeBean 조회
         val coffeeBeansQuery = jpql {
