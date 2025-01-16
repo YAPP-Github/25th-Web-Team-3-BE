@@ -1,6 +1,8 @@
 spring:
   application:
     name: coffee-api
+  profiles:
+    active: local
 
 management:
   endpoint:
@@ -10,3 +12,4 @@ management:
       web:
         exposure:
           include: health, info
+  
