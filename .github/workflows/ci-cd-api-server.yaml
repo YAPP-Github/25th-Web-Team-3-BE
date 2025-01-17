@@ -1,7 +1,7 @@
 name: CI/CD Pipeline
 on:
   push:
-    branches: [main, develop, feature/**]
+    branches: [main, develop]
 env:
   ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
   ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
@@ -18,22 +18,18 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 21
-
       # 2. Gradle 빌드 설정
       - name: Setup Gradle
         run: |
           chmod +x ./gradlew
-          
       - uses: actions/cache@v3
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: ${{ runner.os }}-gradle-
-
       # 3. Jar 빌드 (dev 프로필로 통일)
       - name: Build Application
         run: ./gradlew clean bootJar -Pspring.profiles.active=dev
-
       # 4. AWS 인증
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -41,37 +37,39 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-
       # 5. ECR 로그인 및 이미지 푸시
       - name: Login to Amazon ECR
         run: |
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
-
       - name: Build and push Docker image
         run: |
           docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }} .
           docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
-
-      # 6. ECS 태스크 정의 업데이트 및 배포
-      - name: Create task definition
+      # 6. ECS 태스크 정의 업데이트
+      - name: Update task definition
         run: |
           echo '${{ secrets.TASK_DEFINITION }}' | \
-          jq '(.containerDefinitions[0].environment[] | select(.name == "SPRING_PROFILES_ACTIVE") | .value) = "dev"' > task-definition.json
-          
-      - name: Update image in task definition
+          jq '(.containerDefinitions[0].environment[] | select(.name == "SPRING_PROFILES_ACTIVE") | .value) = "dev" | .containerDefinitions[0].image = "${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}"' > task-definition.json
+      # 7. 빠른 배포를 위한 서비스 업데이트
+      - name: Update service desired count
         run: |
-          jq '.containerDefinitions[0].image = "${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}"' task-definition.json > temp.json && mv temp.json task-definition.json
-          cat task-definition.json  # 디버깅용 출력
-
+          aws ecs update-service \
+            --cluster ${{ env.ECS_CLUSTER }} \
+            --service ${{ env.ECS_SERVICE }} \
+            --desired-count 0
+      # 8. ECS 배포
       - name: Deploy to Amazon ECS
         run: |
+          # 새 태스크 정의 등록
           TASK_DEFINITION_ARN=$(aws ecs register-task-definition \
             --cli-input-json file://task-definition.json \
             --query 'taskDefinition.taskDefinitionArn' \
             --output text)
-            
+          
+          # 서비스 업데이트 및 새 배포
           aws ecs update-service \
             --cluster ${{ env.ECS_CLUSTER }} \
             --service ${{ env.ECS_SERVICE }} \
             --task-definition $TASK_DEFINITION_ARN \
+            --desired-count 1 \
             --force-new-deployment
