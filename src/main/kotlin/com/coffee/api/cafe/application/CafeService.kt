@@ -13,6 +13,6 @@ class CafeService(
 
     override fun execute(input: FindCafe.Query): FindCafe.Result {
         val findAllCafesById = cafeRepository.findAllCafesById(input.lastCafeId, 5)
-        return FindCafe.Result(findAllCafesById.cafes, findAllCafesById.hasNext)
+        return FindCafe.Result(findAllCafesById.cafeInfoWithTags, findAllCafesById.hasNext)
     }
 }

@@ -11,6 +11,7 @@ import com.linecorp.kotlinjdsl.dsl.jpql.jpql
 import com.linecorp.kotlinjdsl.render.jpql.JpqlRenderContext
 import com.linecorp.kotlinjdsl.support.spring.data.jpa.extension.createQuery
 import jakarta.persistence.EntityManager
+import jakarta.persistence.Tuple
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.SliceImpl
 import org.springframework.stereotype.Repository
@@ -34,8 +35,14 @@ class CafeRepositoryImpl(
 
     override fun findAllCafesById(lastCafeId: UUID?, limit: Int): CafePage {
         val query = jpql {
-            select(entity(CafeEntity::class))
-                .from(entity(CafeEntity::class))
+            select<Tuple>(entity(CafeEntity::class), entity(TagEntity::class))
+                .from(
+                    entity(CafeEntity::class),
+                    leftFetchJoin(CafeTagEntity::class)
+                        .on(entity(CafeEntity::class).eq(path(CafeTagEntity::cafe))),
+                    leftFetchJoin(TagEntity::class)
+                        .on(entity(TagEntity::class).eq(path(CafeTagEntity::tags))),
+                )
                 .whereAnd(
                     lastCafeId?.let {
                         path(CafeEntity::id).greaterThan(it)
@@ -47,12 +54,25 @@ class CafeRepositoryImpl(
 
         val resultList = entityManager
             .createQuery(query, jpqlRenderContext)
-            .apply { setMaxResults(limit + 1) }
             .resultList
 
-        val cafes = resultList.take(limit).map { cafeConverter.toDomain(it) }
+        val cafesWithTags = resultList.groupBy(
+            { tuple -> tuple.get(0, CafeEntity::class.java) },
+            { tuple -> tuple.get(1, TagEntity::class.java) }
+        ).map { (cafeEntity, tagEntities) ->
+            val cafe = cafeConverter.toDomain(cafeEntity)
+            val tags = tagEntities.filterNotNull()
+                .map { tagConverter.toDomain(it) }
+
+            CafeInfoWithTags.of(cafe, tags)
+        }.take(limit)
+
+
         val hasNext = resultList.size > limit
-        return CafePage.from(SliceImpl(cafes, Pageable.unpaged(), hasNext))
+        return CafePage.from(SliceImpl(
+            cafesWithTags,
+            Pageable.unpaged(), hasNext
+        ))
     }
 
 
