@@ -3,8 +3,7 @@ package com.coffee.api.cafe.presentation
 import com.coffee.api.cafe.application.usecase.FindCafe
 import com.coffee.api.cafe.application.usecase.FindCafeDetails
 import com.coffee.api.cafe.presentation.docs.CafeApi
-import com.coffee.api.common.presentation.response.ApiResponse
-import com.coffee.api.common.presentation.response.ApiResponseGenerator
+import com.coffee.api.common.support.response.ApiResponse
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -23,16 +22,16 @@ class CafeController(
     @GetMapping
     override fun findAllCafes(
         @RequestParam(value = "lastCafeId", required = false) lastCafeId: UUID?,
-    ): ApiResponse<ApiResponse.SuccessBody<FindCafe.Result?>> {
+    ): ApiResponse<Any> {
         val result = findCafe.execute(FindCafe.Query(lastCafeId))
-        return ApiResponseGenerator.success(data = result, HttpStatus.OK)
+        return ApiResponse.success(result)
     }
 
     @GetMapping("/details/{cafeId}")
     override fun getCafeDetails(
         @PathVariable cafeId: UUID,
-        ): ApiResponse<ApiResponse.SuccessBody<FindCafeDetails.Result?>> {
+        ): ApiResponse<Any> {
         val result = findCafeDetails.execute(FindCafeDetails.Query(cafeId))
-        return ApiResponseGenerator.success(data = result, HttpStatus.OK)
+        return ApiResponse.success(result)
     }
 }
