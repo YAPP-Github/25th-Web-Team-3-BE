@@ -1,6 +1,6 @@
 package com.coffee.api.cafe.presentation.adapter.dto.response
 
-class CoffeeBeanResponse(
+data class CoffeeBeanResponse(
     val id: String,
     val name: String,
     val engName: String,
