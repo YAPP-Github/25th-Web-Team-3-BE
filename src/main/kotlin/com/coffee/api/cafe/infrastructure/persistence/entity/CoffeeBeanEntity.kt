@@ -21,6 +21,7 @@ class CoffeeBeanEntity(
     id: UUID,
     cafe: CafeEntity,
     name: String,
+    engName: String,
     imageUrl: String,
     flavor: Flavor,
     countryOfOrigin: String,
@@ -37,6 +38,9 @@ class CoffeeBeanEntity(
         protected set
 
     var name: String = name
+        protected set
+
+    var engName: String = engName
         protected set
 
     var imageUrl: String = imageUrl

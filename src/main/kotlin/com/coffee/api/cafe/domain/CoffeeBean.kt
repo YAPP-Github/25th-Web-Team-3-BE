@@ -9,6 +9,7 @@ class CoffeeBean private constructor(
     override val id: Id,
     val cafe: Cafe,
     val name: String,
+    val engName: String,
     val imageUrl: String,
     val flavor: Flavor,
     val countryOfOrigin: String,
@@ -21,6 +22,7 @@ class CoffeeBean private constructor(
             id: UUID,
             cafe: Cafe,
             name: String,
+            engName: String,
             imageUrl: String,
             flavor: Flavor,
             countryOfOrigin: String,
@@ -30,6 +32,7 @@ class CoffeeBean private constructor(
                 id = UUIDTypeId.from(id),
                 cafe = cafe,
                 name = name,
+                engName = engName,
                 imageUrl = imageUrl,
                 flavor = flavor,
                 countryOfOrigin = countryOfOrigin,
@@ -41,11 +44,12 @@ class CoffeeBean private constructor(
             id: UUID,
             cafe: Cafe,
             name: String,
+            engName: String,
             imageUrl: String,
             flavor: Flavor,
             countryOfOrigin: String,
             roastingPoint: RoastingPoint
-        ): CoffeeBean = create(id, cafe, name, imageUrl, flavor, countryOfOrigin, roastingPoint)
+        ): CoffeeBean = create(id, cafe, name, engName, imageUrl, flavor, countryOfOrigin, roastingPoint)
     }
 
     data class Id(override val value: UUID) : UUIDTypeId(value)
