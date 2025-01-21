@@ -29,7 +29,6 @@ class CafeController(
             FindAllCafesResponse(
                 cafeId = cafe.cafeId.value.toString(),
                 name = cafe.name,
-                engName = "",
                 nearestStation = cafe.nearestStation,
                 location = cafe.location,
                 price = cafe.price,
