@@ -67,7 +67,15 @@ class CafeController(
                 price = result.cafeDetails.cafe.price,
                 mainImageUrl = result.cafeDetails.cafe.mainImages,
             ),
-            coffeeBean = result.cafeDetails.coffeeBean,
+            coffeeBean = CoffeeBeanResponse(
+                id = result.cafeDetails.coffeeBean.id.value.toString(),
+                name = result.cafeDetails.coffeeBean.name,
+                engName = result.cafeDetails.coffeeBean.engName,
+                imageUrl = result.cafeDetails.coffeeBean.imageUrl,
+                flavor = result.cafeDetails.coffeeBean.flavor.displayName,
+                countryOfOrigin = result.cafeDetails.coffeeBean.countryOfOrigin,
+                roastingPoint = result.cafeDetails.coffeeBean.roastingPoint.toString(),
+            ),
             menus = result.cafeDetails.menu.map { menu ->
                 MenuResponse(
                     id = menu.id.value.toString(),
