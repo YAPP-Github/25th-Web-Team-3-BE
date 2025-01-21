@@ -60,7 +60,7 @@ class CafeController(
         val response = GetCafeDetailsResponse(
             cafe = CafeResponse(
                 id = result.cafeDetails.cafe.id.value.toString(),
-                naverMapUrl = "",
+                naverMapUrl = result.cafeDetails.cafe.naverMapUrl,
                 name = result.cafeDetails.cafe.name,
                 nearestStation = result.cafeDetails.cafe.nearestStation,
                 location = result.cafeDetails.cafe.location,

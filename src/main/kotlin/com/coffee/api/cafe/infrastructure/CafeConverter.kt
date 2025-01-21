@@ -13,6 +13,7 @@ class CafeConverter : DomainEntityConverter<Cafe, CafeEntity>(
     override fun toDomain(entity: CafeEntity): Cafe {
         return Cafe(
             id = entity.id,
+            naverMapUrl = entity.naverMapUrl,
             name = entity.name,
             nearestStation = entity.nearestStation,
             location = entity.location,
@@ -25,6 +26,7 @@ class CafeConverter : DomainEntityConverter<Cafe, CafeEntity>(
     override fun toEntity(domain: Cafe): CafeEntity {
         return CafeEntity(
             id = domain.id.value,
+            naverMapUrl = domain.naverMapUrl,
             name = domain.name,
             nearestStation = domain.nearestStation,
             location = domain.location,
