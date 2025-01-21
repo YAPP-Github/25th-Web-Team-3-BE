@@ -1,7 +1,7 @@
 package com.coffee.api.cafe.presentation.docs
 
-import com.coffee.api.cafe.application.usecase.FindCafe
-import com.coffee.api.cafe.application.usecase.FindCafeDetails
+import com.coffee.api.cafe.presentation.adapter.dto.response.FindAllCafesResponseWrapper
+import com.coffee.api.cafe.presentation.adapter.dto.response.GetCafeDetailsResponse
 import com.coffee.api.common.support.response.ApiResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -15,10 +15,10 @@ interface CafeApi {
     @Operation(summary = "모든 카페 조회", description = "모든 카페를 조회합니다.")
     fun findAllCafes(
         @RequestParam(value = "lastCafeId", required = false) lastCafeId: UUID?,
-    ): ApiResponse<Any>
+    ): ApiResponse<FindAllCafesResponseWrapper>
 
     @Operation(summary = "카페 상세 조회", description = "cafeId로 해당 카페 정보를 상세 조회합니다.")
     fun getCafeDetails(
         @PathVariable(value = "cafeId") cafeId: UUID,
-    ): ApiResponse<Any>
+    ): ApiResponse<GetCafeDetailsResponse>
 }

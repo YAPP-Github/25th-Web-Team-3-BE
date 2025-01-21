@@ -1,6 +1,9 @@
 package com.coffee.api.cafe.infrastructure.persistence.repository
 
-import com.coffee.api.cafe.application.repository.CafeRepository
+import com.coffee.api.cafe.application.model.CafeDetails
+import com.coffee.api.cafe.application.model.CafeInfoWithTags
+import com.coffee.api.cafe.application.model.CafePage
+import com.coffee.api.cafe.application.port.outbound.CafeRepository
 import com.coffee.api.cafe.domain.*
 import com.coffee.api.cafe.infrastructure.CoffeeBeanConverter
 import com.coffee.api.cafe.infrastructure.MenuConverter

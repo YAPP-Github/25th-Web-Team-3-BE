@@ -1,4 +1,4 @@
-package com.coffee.api.cafe.domain
+package com.coffee.api.cafe.application.model
 
 import org.springframework.data.domain.Slice
 

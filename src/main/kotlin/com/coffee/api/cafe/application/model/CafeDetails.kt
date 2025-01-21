@@ -1,9 +1,13 @@
-package com.coffee.api.cafe.domain
+package com.coffee.api.cafe.application.model
 
+import com.coffee.api.cafe.domain.Cafe
+import com.coffee.api.cafe.domain.CoffeeBean
+import com.coffee.api.cafe.domain.Menu
+import com.coffee.api.cafe.domain.Tag
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDateTime
 
-class CafeDetails private constructor(
+class CafeDetails (
     val cafe: Cafe,
     val coffeeBean: CoffeeBean,
     val menu: List<Menu>,
