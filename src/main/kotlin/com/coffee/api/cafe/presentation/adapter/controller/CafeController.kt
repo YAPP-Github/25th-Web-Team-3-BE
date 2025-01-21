@@ -32,7 +32,7 @@ class CafeController(
                 nearestStation = cafe.nearestStation,
                 location = cafe.location,
                 price = cafe.price,
-                previewImages = cafe.previewImages ?: "",
+                previewImages = cafe.previewImages,
                 tags = cafe.tags.map { tag ->
                     TagResponse(
                         id = tag.id.value.toString(),

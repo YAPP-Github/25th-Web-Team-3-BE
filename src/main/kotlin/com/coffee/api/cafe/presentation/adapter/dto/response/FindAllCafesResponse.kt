@@ -12,6 +12,6 @@ data class FindAllCafesResponse(
     val nearestStation: String,
     val location: String,
     val price: Int,
-    val previewImages: String,
+    val previewImages: String?,
     val tags: List<TagResponse>
 )
