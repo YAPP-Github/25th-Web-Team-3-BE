@@ -59,6 +59,7 @@ class CafeController(
         val response = GetCafeDetailsResponse(
             cafe = CafeResponse(
                 id = result.cafeDetails.cafe.id.value.toString(),
+                reasonForSelection = result.cafeDetails.cafe.reasonForSelection,
                 naverMapUrl = result.cafeDetails.cafe.naverMapUrl,
                 name = result.cafeDetails.cafe.name,
                 nearestStation = result.cafeDetails.cafe.nearestStation,
@@ -68,6 +69,7 @@ class CafeController(
             ),
             coffeeBean = CoffeeBeanResponse(
                 id = result.cafeDetails.coffeeBean.id.value.toString(),
+                description = result.cafeDetails.coffeeBean.description,
                 name = result.cafeDetails.coffeeBean.name,
                 engName = result.cafeDetails.coffeeBean.engName,
                 imageUrl = result.cafeDetails.coffeeBean.imageUrl,

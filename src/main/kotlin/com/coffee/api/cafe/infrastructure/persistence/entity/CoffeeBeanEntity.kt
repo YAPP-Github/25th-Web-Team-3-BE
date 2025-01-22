@@ -21,6 +21,7 @@ import java.util.UUID
 @Table(name = "coffee_beans")
 class CoffeeBeanEntity(
     id: UUID,
+    description: String,
     cafe: CafeEntity,
     name: String,
     engName: String,
@@ -32,6 +33,9 @@ class CoffeeBeanEntity(
 
     @Id
     var id: UUID = id
+        protected set
+
+    var description: String = description
         protected set
 
     @ManyToOne(fetch = FetchType.LAZY)

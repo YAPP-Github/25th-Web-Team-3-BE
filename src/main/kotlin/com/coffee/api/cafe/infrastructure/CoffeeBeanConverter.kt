@@ -16,6 +16,7 @@ class CoffeeBeanConverter(
     override fun toDomain(entity: CoffeeBeanEntity): CoffeeBean {
         return CoffeeBean(
             id = entity.id,
+            description = entity.description,
             cafe = cafeConverter.toDomain(entity.cafe),
             name = entity.name,
             engName = entity.engName,
@@ -29,6 +30,7 @@ class CoffeeBeanConverter(
     override fun toEntity(domain: CoffeeBean): CoffeeBeanEntity {
         return CoffeeBeanEntity(
             id = domain.id.value,
+            description = domain.description,
             cafe = cafeConverter.toEntity(domain.cafe),
             name = domain.name,
             engName = domain.engName,

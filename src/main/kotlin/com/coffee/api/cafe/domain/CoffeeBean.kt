@@ -7,6 +7,7 @@ import java.util.UUID
 
 class CoffeeBean private constructor(
     override val id: Id,
+    val description: String,
     val cafe: Cafe,
     val name: String,
     val engName: String,
@@ -20,6 +21,7 @@ class CoffeeBean private constructor(
         @JsonCreator
         fun create(
             id: UUID,
+            description: String,
             cafe: Cafe,
             name: String,
             engName: String,
@@ -30,6 +32,7 @@ class CoffeeBean private constructor(
         ): CoffeeBean {
             return CoffeeBean(
                 id = UUIDTypeId.from(id),
+                description = description,
                 cafe = cafe,
                 name = name,
                 engName = engName,
@@ -42,6 +45,7 @@ class CoffeeBean private constructor(
 
         operator fun invoke(
             id: UUID,
+            description: String,
             cafe: Cafe,
             name: String,
             engName: String,
@@ -49,7 +53,7 @@ class CoffeeBean private constructor(
             flavors: List<Flavor>,
             countryOfOrigin: List<String>,
             roastingPoint: RoastingPoint
-        ): CoffeeBean = create(id, cafe, name, engName, imageUrl, flavors, countryOfOrigin, roastingPoint)
+        ): CoffeeBean = create(id, description, cafe, name, engName, imageUrl, flavors, countryOfOrigin, roastingPoint)
     }
 
     data class Id(override val value: UUID) : UUIDTypeId(value)

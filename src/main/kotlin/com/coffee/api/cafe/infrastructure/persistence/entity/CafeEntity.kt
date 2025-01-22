@@ -8,6 +8,7 @@ import java.util.UUID
 @Table(name = "cafes")
 class CafeEntity(
     id: UUID,
+    reasonForSelection: String,
     naverMapUrl: String,
     name: String,
     nearestStation: String,
@@ -19,6 +20,10 @@ class CafeEntity(
 
     @Id
     var id: UUID = id
+        protected set
+
+    @Column(nullable = false)
+    var reasonForSelection: String = reasonForSelection
         protected set
 
     @Column(nullable = false)

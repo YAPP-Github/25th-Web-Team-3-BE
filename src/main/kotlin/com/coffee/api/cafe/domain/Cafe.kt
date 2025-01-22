@@ -7,6 +7,7 @@ import java.util.*
 
 class Cafe private constructor(
     override val id: Id,
+    val reasonForSelection: String,
     val naverMapUrl: String,
     val name: String,
     val nearestStation: String,
@@ -19,6 +20,7 @@ class Cafe private constructor(
         @JsonCreator
         fun create(
             id: UUID,
+            reasonForSelection: String,
             naverMapUrl: String,
             name: String,
             nearestStation: String,
@@ -29,6 +31,7 @@ class Cafe private constructor(
         ): Cafe {
             return Cafe(
                 id = UUIDTypeId.from(id),
+                reasonForSelection = reasonForSelection,
                 naverMapUrl = naverMapUrl,
                 name = name,
                 nearestStation = nearestStation,
@@ -41,6 +44,7 @@ class Cafe private constructor(
 
         operator fun invoke(
             id: UUID,
+            reasonForSelection: String,
             naverMapUrl: String,
             name: String,
             nearestStation: String,
@@ -48,7 +52,7 @@ class Cafe private constructor(
             price: Int,
             previewImages: List<String>?,
             mainImages: List<String>?,
-        ): Cafe = create(id, naverMapUrl, name, nearestStation, location, price, previewImages, mainImages)
+        ): Cafe = create(id, reasonForSelection, naverMapUrl, name, nearestStation, location, price, previewImages, mainImages)
     }
 
     data class Id(override val value: UUID) : UUIDTypeId(value)
