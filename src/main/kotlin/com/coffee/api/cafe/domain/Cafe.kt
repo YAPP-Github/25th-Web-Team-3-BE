@@ -7,26 +7,32 @@ import java.util.*
 
 class Cafe private constructor(
     override val id: Id,
+    val reasonForSelection: String,
+    val naverMapUrl: String,
     val name: String,
     val nearestStation: String,
     val location: String,
     val price: Int,
-    val previewImages: String?,
-    val mainImages: String?,
+    val previewImages: List<String>?,
+    val mainImages: List<String>?,
 ) : AbstractDomain<Cafe, Cafe.Id>() {
     companion object {
         @JsonCreator
         fun create(
             id: UUID,
+            reasonForSelection: String,
+            naverMapUrl: String,
             name: String,
             nearestStation: String,
             location: String,
             price: Int,
-            previewImages: String?,
-            mainImages: String?,
+            previewImages: List<String>?,
+            mainImages: List<String>?,
         ): Cafe {
             return Cafe(
                 id = UUIDTypeId.from(id),
+                reasonForSelection = reasonForSelection,
+                naverMapUrl = naverMapUrl,
                 name = name,
                 nearestStation = nearestStation,
                 location = location,
@@ -38,13 +44,15 @@ class Cafe private constructor(
 
         operator fun invoke(
             id: UUID,
+            reasonForSelection: String,
+            naverMapUrl: String,
             name: String,
             nearestStation: String,
             location: String,
             price: Int,
-            previewImages: String?,
-            mainImages: String?,
-        ): Cafe = create(id, name, nearestStation, location, price, previewImages, mainImages)
+            previewImages: List<String>?,
+            mainImages: List<String>?,
+        ): Cafe = create(id, reasonForSelection, naverMapUrl, name, nearestStation, location, price, previewImages, mainImages)
     }
 
     data class Id(override val value: UUID) : UUIDTypeId(value)

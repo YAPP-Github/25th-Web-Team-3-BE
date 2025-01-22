@@ -1,7 +1,7 @@
 package com.coffee.api.cafe.application
 
-import com.coffee.api.cafe.application.repository.CafeRepository
-import com.coffee.api.cafe.application.usecase.FindCafeDetails
+import com.coffee.api.cafe.application.port.inbound.FindCafeDetails
+import com.coffee.api.cafe.application.port.outbound.CafeRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -11,8 +11,8 @@ class CafeDetailsService(
     private val cafeRepository: CafeRepository,
 ) : FindCafeDetails {
 
-    override fun execute(input: FindCafeDetails.Query): FindCafeDetails.Result {
-        val findByCafeId = cafeRepository.findByCafeId(input.cafeId)
+    override fun invoke(query: FindCafeDetails.Query): FindCafeDetails.Result {
+        val findByCafeId = cafeRepository.findByCafeId(query.cafeId)
         return FindCafeDetails.Result(findByCafeId)
     }
 }

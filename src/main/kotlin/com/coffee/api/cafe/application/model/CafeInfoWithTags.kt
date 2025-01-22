@@ -1,4 +1,7 @@
-package com.coffee.api.cafe.domain
+package com.coffee.api.cafe.application.model
+
+import com.coffee.api.cafe.domain.Cafe
+import com.coffee.api.cafe.domain.Tag
 
 class CafeInfoWithTags(
     val cafeId: Cafe.Id,
@@ -6,7 +9,7 @@ class CafeInfoWithTags(
     val nearestStation: String,
     val location: String,
     val price: Int,
-    val previewImages: String?,
+    val previewImages: List<String>?,
     val tags: List<Tag>,
 ) {
     companion object {
@@ -18,7 +21,7 @@ class CafeInfoWithTags(
                 location = cafe.location,
                 price = cafe.price,
                 previewImages = cafe.previewImages,
-                tags = tags
+                tags = tags,
             )
         }
     }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
+@io.swagger.v3.oas.annotations.Hidden
 class ApiControllerAdvice {
     @ExceptionHandler(value = [CoreApiException::class])
     fun handleCoreApiException(e: CoreApiException): ResponseEntity<ApiResponse<Any>> {

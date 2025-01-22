@@ -7,11 +7,13 @@ import java.util.UUID
 
 class CoffeeBean private constructor(
     override val id: Id,
+    val description: String,
     val cafe: Cafe,
     val name: String,
+    val engName: String,
     val imageUrl: String,
-    val flavor: Flavor,
-    val countryOfOrigin: String,
+    val flavors: List<Flavor>,
+    val countryOfOrigin: List<String>,
     val roastingPoint: RoastingPoint
 ) : AbstractDomain<CoffeeBean, CoffeeBean.Id>() {
 
@@ -19,19 +21,23 @@ class CoffeeBean private constructor(
         @JsonCreator
         fun create(
             id: UUID,
+            description: String,
             cafe: Cafe,
             name: String,
+            engName: String,
             imageUrl: String,
-            flavor: Flavor,
-            countryOfOrigin: String,
+            flavors: List<Flavor>,
+            countryOfOrigin: List<String>,
             roastingPoint: RoastingPoint
         ): CoffeeBean {
             return CoffeeBean(
                 id = UUIDTypeId.from(id),
+                description = description,
                 cafe = cafe,
                 name = name,
+                engName = engName,
                 imageUrl = imageUrl,
-                flavor = flavor,
+                flavors = flavors,
                 countryOfOrigin = countryOfOrigin,
                 roastingPoint = roastingPoint
             )
@@ -39,13 +45,15 @@ class CoffeeBean private constructor(
 
         operator fun invoke(
             id: UUID,
+            description: String,
             cafe: Cafe,
             name: String,
+            engName: String,
             imageUrl: String,
-            flavor: Flavor,
-            countryOfOrigin: String,
+            flavors: List<Flavor>,
+            countryOfOrigin: List<String>,
             roastingPoint: RoastingPoint
-        ): CoffeeBean = create(id, cafe, name, imageUrl, flavor, countryOfOrigin, roastingPoint)
+        ): CoffeeBean = create(id, description, cafe, name, engName, imageUrl, flavors, countryOfOrigin, roastingPoint)
     }
 
     data class Id(override val value: UUID) : UUIDTypeId(value)

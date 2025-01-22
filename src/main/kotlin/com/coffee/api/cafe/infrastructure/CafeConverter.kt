@@ -13,6 +13,8 @@ class CafeConverter : DomainEntityConverter<Cafe, CafeEntity>(
     override fun toDomain(entity: CafeEntity): Cafe {
         return Cafe(
             id = entity.id,
+            reasonForSelection = entity.reasonForSelection,
+            naverMapUrl = entity.naverMapUrl,
             name = entity.name,
             nearestStation = entity.nearestStation,
             location = entity.location,
@@ -25,12 +27,14 @@ class CafeConverter : DomainEntityConverter<Cafe, CafeEntity>(
     override fun toEntity(domain: Cafe): CafeEntity {
         return CafeEntity(
             id = domain.id.value,
+            reasonForSelection = domain.reasonForSelection,
+            naverMapUrl = domain.naverMapUrl,
             name = domain.name,
             nearestStation = domain.nearestStation,
             location = domain.location,
             price = domain.price,
-            previewImages = domain.previewImages ?: "",
-            mainImages = domain.mainImages ?: "",
+            previewImages = domain.previewImages ?: listOf(),
+            mainImages = domain.mainImages ?: listOf(),
         )
     }
 }
