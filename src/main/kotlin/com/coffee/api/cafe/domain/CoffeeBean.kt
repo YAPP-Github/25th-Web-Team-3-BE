@@ -12,7 +12,7 @@ class CoffeeBean private constructor(
     val engName: String,
     val imageUrl: String,
     val flavors: List<Flavor>,
-    val countryOfOrigin: String,
+    val countryOfOrigin: List<String>,
     val roastingPoint: RoastingPoint
 ) : AbstractDomain<CoffeeBean, CoffeeBean.Id>() {
 
@@ -25,7 +25,7 @@ class CoffeeBean private constructor(
             engName: String,
             imageUrl: String,
             flavors: List<Flavor>,
-            countryOfOrigin: String,
+            countryOfOrigin: List<String>,
             roastingPoint: RoastingPoint
         ): CoffeeBean {
             return CoffeeBean(
@@ -47,7 +47,7 @@ class CoffeeBean private constructor(
             engName: String,
             imageUrl: String,
             flavors: List<Flavor>,
-            countryOfOrigin: String,
+            countryOfOrigin: List<String>,
             roastingPoint: RoastingPoint
         ): CoffeeBean = create(id, cafe, name, engName, imageUrl, flavors, countryOfOrigin, roastingPoint)
     }
