@@ -5,7 +5,7 @@ data class CoffeeBeanResponse(
     val name: String,
     val engName: String,
     val imageUrl: String,
-    val flavor: String,
+    val flavors: List<String>,
     val countryOfOrigin: String,
     val roastingPoint: String,
 )

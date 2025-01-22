@@ -3,7 +3,9 @@ package com.coffee.api.cafe.infrastructure.persistence.entity
 import com.coffee.api.cafe.domain.Flavor
 import com.coffee.api.cafe.domain.RoastingPoint
 import com.coffee.api.common.infrastructure.persistence.BaseEntity
+import jakarta.persistence.CollectionTable
 import jakarta.persistence.ConstraintMode
+import jakarta.persistence.ElementCollection
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
@@ -23,7 +25,7 @@ class CoffeeBeanEntity(
     name: String,
     engName: String,
     imageUrl: String,
-    flavor: Flavor,
+    flavors: List<Flavor>,
     countryOfOrigin: String,
     roastingPoint: RoastingPoint,
 ) : BaseEntity() {
@@ -46,8 +48,13 @@ class CoffeeBeanEntity(
     var imageUrl: String = imageUrl
         protected set
 
+    @ElementCollection(targetClass = Flavor::class, fetch = FetchType.EAGER)
+    @CollectionTable(
+        name = "coffee_bean_flavors",
+        joinColumns = [JoinColumn(name = "coffee_bean_id")],
+    )
     @Enumerated(EnumType.STRING)
-    var flavor: Flavor = flavor
+    var flavors: List<Flavor> = flavors
         protected set
 
     var countryOfOrigin: String = countryOfOrigin

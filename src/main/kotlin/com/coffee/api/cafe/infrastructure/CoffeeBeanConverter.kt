@@ -20,7 +20,7 @@ class CoffeeBeanConverter(
             name = entity.name,
             engName = entity.engName,
             imageUrl = entity.imageUrl,
-            flavor = entity.flavor,
+            flavors = entity.flavors,
             countryOfOrigin = entity.countryOfOrigin,
             roastingPoint = entity.roastingPoint,
         )
@@ -33,7 +33,7 @@ class CoffeeBeanConverter(
             name = domain.name,
             engName = domain.engName,
             imageUrl = domain.imageUrl,
-            flavor = domain.flavor,
+            flavors = domain.flavors,
             countryOfOrigin = domain.countryOfOrigin,
             roastingPoint = domain.roastingPoint,
         )
