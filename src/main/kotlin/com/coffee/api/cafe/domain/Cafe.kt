@@ -3,7 +3,7 @@ package com.coffee.api.cafe.domain
 import com.coffee.api.common.domain.AbstractDomain
 import com.coffee.api.common.domain.UUIDTypeId
 import com.fasterxml.jackson.annotation.JsonCreator
-import java.util.*
+import java.util.UUID
 
 class Cafe private constructor(
     override val id: Id,
