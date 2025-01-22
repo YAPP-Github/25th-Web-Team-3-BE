@@ -31,8 +31,8 @@ class CafeConverter : DomainEntityConverter<Cafe, CafeEntity>(
             nearestStation = domain.nearestStation,
             location = domain.location,
             price = domain.price,
-            previewImages = domain.previewImages ?: "",
-            mainImages = domain.mainImages ?: "",
+            previewImages = domain.previewImages ?: listOf(),
+            mainImages = domain.mainImages ?: listOf(),
         )
     }
 }

@@ -9,7 +9,7 @@ class CafeInfoWithTags(
     val nearestStation: String,
     val location: String,
     val price: Int,
-    val previewImages: String?,
+    val previewImages: List<String>?,
     val tags: List<Tag>,
 ) {
     companion object {

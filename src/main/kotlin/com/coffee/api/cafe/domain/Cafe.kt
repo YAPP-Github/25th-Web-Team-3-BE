@@ -12,8 +12,8 @@ class Cafe private constructor(
     val nearestStation: String,
     val location: String,
     val price: Int,
-    val previewImages: String?,
-    val mainImages: String?,
+    val previewImages: List<String>?,
+    val mainImages: List<String>?,
 ) : AbstractDomain<Cafe, Cafe.Id>() {
     companion object {
         @JsonCreator
@@ -24,8 +24,8 @@ class Cafe private constructor(
             nearestStation: String,
             location: String,
             price: Int,
-            previewImages: String?,
-            mainImages: String?,
+            previewImages: List<String>?,
+            mainImages: List<String>?,
         ): Cafe {
             return Cafe(
                 id = UUIDTypeId.from(id),
@@ -46,8 +46,8 @@ class Cafe private constructor(
             nearestStation: String,
             location: String,
             price: Int,
-            previewImages: String?,
-            mainImages: String?,
+            previewImages: List<String>?,
+            mainImages: List<String>?,
         ): Cafe = create(id, naverMapUrl, name, nearestStation, location, price, previewImages, mainImages)
     }
 

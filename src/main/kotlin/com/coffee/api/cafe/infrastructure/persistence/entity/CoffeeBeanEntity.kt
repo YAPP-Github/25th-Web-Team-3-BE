@@ -52,6 +52,7 @@ class CoffeeBeanEntity(
     @CollectionTable(
         name = "coffee_bean_flavors",
         joinColumns = [JoinColumn(name = "coffee_bean_id")],
+        foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT)
     )
     @Enumerated(EnumType.STRING)
     var flavors: List<Flavor> = flavors

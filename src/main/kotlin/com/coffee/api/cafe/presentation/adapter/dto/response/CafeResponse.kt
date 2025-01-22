@@ -7,5 +7,5 @@ data class CafeResponse(
     val nearestStation: String,
     val location: String,
     val price: Int,
-    val mainImageUrl: String?,
+    val mainImageUrl: List<String>?,
 )

@@ -1,10 +1,7 @@
 package com.coffee.api.cafe.infrastructure.persistence.entity
 
 import com.coffee.api.common.infrastructure.persistence.BaseEntity
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import java.util.UUID
 
 @Entity
@@ -16,8 +13,8 @@ class CafeEntity(
     nearestStation: String,
     location: String,
     price: Int,
-    previewImages: String,
-    mainImages: String,
+    previewImages: List<String>,
+    mainImages: List<String>,
 ) : BaseEntity() {
 
     @Id
@@ -41,9 +38,21 @@ class CafeEntity(
     var price: Int = price
         protected set
 
-    var previewImages: String = previewImages
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+        name = "cafe_preview_images",
+        joinColumns = [JoinColumn(name = "cafe_id")],
+        foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT)
+    )
+    var previewImages: List<String> = previewImages
         protected set
 
-    var mainImages: String = mainImages
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+        name = "cafe_main_images",
+        joinColumns = [JoinColumn(name = "cafe_id")],
+        foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT)
+    )
+    var mainImages: List<String> = mainImages
         protected set
 }
