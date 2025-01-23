@@ -15,6 +15,7 @@ import java.util.UUID
 @Table(name = "menus")
 class MenuEntity(
     id: UUID,
+    name : String,
     cafe: CafeEntity,
     price: Int,
     imageUrl: String,
@@ -23,6 +24,9 @@ class MenuEntity(
 
     @Id
     var id: UUID = id
+        protected set
+
+    var name: String = name
         protected set
 
     @ManyToOne(fetch = FetchType.LAZY)

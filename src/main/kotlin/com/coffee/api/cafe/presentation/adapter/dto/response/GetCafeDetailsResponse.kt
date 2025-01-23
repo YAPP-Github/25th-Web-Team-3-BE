@@ -9,5 +9,5 @@ data class GetCafeDetailsResponse(
     val menus: List<MenuResponse>,
     val tags: List<TagResponse>,
     @JsonFormat(pattern = "yyyy-MM-dd")
-    val updatedAt: LocalDateTime
+    val updatedAt: LocalDateTime,
 )

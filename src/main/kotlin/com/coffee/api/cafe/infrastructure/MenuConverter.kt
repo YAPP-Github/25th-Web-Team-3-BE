@@ -8,28 +8,30 @@ import org.springframework.stereotype.Component
 
 @Component
 class MenuConverter(
-    private val cafeConverter: CafeConverter
-): DomainEntityConverter<Menu, MenuEntity>(
+    private val cafeConverter: CafeConverter,
+) : DomainEntityConverter<Menu, MenuEntity>(
     Menu::class,
-    MenuEntity::class
+    MenuEntity::class,
 ) {
     override fun toDomain(entity: MenuEntity): Menu {
         return Menu(
             id = entity.id,
+            name = entity.name,
             cafe = cafeConverter.toDomain(entity.cafe),
             price = entity.price,
             imageUrl = entity.imageUrl,
-            description = entity.description
+            description = entity.description,
         )
     }
 
     override fun toEntity(domain: Menu): MenuEntity {
         return MenuEntity(
             id = domain.id.value,
+            name = domain.name,
             cafe = cafeConverter.toEntity(domain.cafe),
             price = domain.price,
             imageUrl = domain.imageUrl,
-            description = domain.description
+            description = domain.description,
         )
     }
 }
