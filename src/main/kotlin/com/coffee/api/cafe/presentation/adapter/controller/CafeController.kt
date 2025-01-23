@@ -82,6 +82,7 @@ class CafeController(
             menus = result.cafeDetails.menu.map { menu ->
                 MenuResponse(
                     id = menu.id.value.toString(),
+                    name = menu.name,
                     price = menu.price,
                     imageUrl = menu.imageUrl,
                     description = menu.description,
