@@ -17,4 +17,4 @@ spring:
 
 cors:
   allow-origin:
-    urls: http://localhost:3000
+    urls: http://localhost:3000, https://25th-web-team-3-fe.vercel.app
