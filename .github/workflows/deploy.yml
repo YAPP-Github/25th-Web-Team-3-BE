@@ -58,7 +58,7 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      # 1. 최신 이미지를 풀받습니다
+      # 1. 최신 이미지를 풀받습니다.
       - name: docker pull
         run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/coffee
 
