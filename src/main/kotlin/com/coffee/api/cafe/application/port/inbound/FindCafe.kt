@@ -8,7 +8,8 @@ interface FindCafe {
     fun invoke(query: Query): Result
 
     data class Query(
-        val lastCafeId: UUID?
+        val lastCafeId: UUID?,
+        val area: String? = null,
     )
 
     data class Result(

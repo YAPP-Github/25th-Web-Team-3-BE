@@ -24,8 +24,9 @@ class CafeController(
     @GetMapping
     override fun findAllCafes(
         @RequestParam(value = "lastCafeId", required = false) lastCafeId: UUID?,
+        @RequestParam(value = "area", required = false) area: String?,
     ): ApiResponse<FindAllCafesResponseWrapper> {
-        val result = findCafe.invoke(FindCafe.Query(lastCafeId))
+        val result = findCafe.invoke(FindCafe.Query(lastCafeId, area))
 
         val cafes = result.cafes.map { cafe ->
             FindAllCafesResponse(
