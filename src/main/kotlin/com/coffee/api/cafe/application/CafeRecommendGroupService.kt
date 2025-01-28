@@ -18,7 +18,7 @@ class CafeRecommendGroupService(
                 name = it.group.title,
                 cafes = it.cafes.map { cafe ->
                     FindRecommendCafe.SimpleCafe(
-                        id = cafe.id.toString(),
+                        id = cafe.id.value.toString(),
                         mainImage = cafe.mainImages?.firstOrNull() ?: "",
                         name = cafe.name,
                         nearestStation = cafe.nearestStation,
