@@ -1,5 +1,6 @@
 package com.coffee.api.cafe.presentation.docs
 
+import com.coffee.api.cafe.application.port.inbound.FindCafeArea
 import com.coffee.api.cafe.presentation.adapter.dto.response.FindAllCafesResponseWrapper
 import com.coffee.api.cafe.presentation.adapter.dto.response.GetCafeDetailsResponse
 import com.coffee.api.common.support.response.ApiResponse
@@ -21,4 +22,10 @@ interface CafeApi {
     fun getCafeDetails(
         @PathVariable(value = "cafeId") cafeId: UUID,
     ): ApiResponse<GetCafeDetailsResponse>
+
+    @Operation(
+        summary = "카페 지역 목록 조회",
+        description = "카페를 필터링할 수 있는 지역 목록을 조회합니다.",
+    )
+    fun getAreas(): ApiResponse<FindCafeArea.Result>
 }
