@@ -13,14 +13,15 @@ import java.util.*
     ]
 )
 class CafeRecommendGroupMappingEntity(
+    @Id
+    val id: UUID = UUID.randomUUID(),
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cafe_id", foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     var cafe: CafeEntity,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
-    var recommendGroup: CafeRecommendGroupEntity,
+    var recommendGroup: CafeRecommendGroupEntity
 
-    @Id
-    val id: UUID = UUID.randomUUID(),
 ) : BaseEntity()
