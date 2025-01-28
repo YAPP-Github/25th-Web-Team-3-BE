@@ -36,7 +36,7 @@ class CafeRepositoryImpl(
             .map { cafeConverter.toDomain(it) }
     }
 
-    override fun findAllCafesById(lastCafeId: UUID?, limit: Int): CafePage {
+    override fun findAllCafesById(lastCafeId: UUID?, area: CafeArea?, limit: Int): CafePage {
         val query = jpql {
             select<Tuple>(entity(CafeEntity::class), entity(TagEntity::class))
                 .from(
@@ -49,6 +49,9 @@ class CafeRepositoryImpl(
                 .whereAnd(
                     lastCafeId?.let {
                         path(CafeEntity::id).greaterThan(it)
+                    },
+                    area?.let {
+                        path(CafeEntity::area).eq(it)
                     },
                     path(CafeEntity::deletedAt).isNull(),
                 )

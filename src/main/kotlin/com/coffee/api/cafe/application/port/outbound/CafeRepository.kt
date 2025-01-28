@@ -8,7 +8,7 @@ import java.util.UUID
 
 interface CafeRepository {
     fun findAll(): List<Cafe>
-    fun findAllCafesById(lastCafeId: UUID?, limit: Int): CafePage
+    fun findAllCafesById(lastCafeId: UUID?, area: CafeArea?, limit: Int): CafePage
     fun findByCafeId(cafeId: UUID?): CafeDetails
     fun findAreas(): List<CafeArea>
 }
