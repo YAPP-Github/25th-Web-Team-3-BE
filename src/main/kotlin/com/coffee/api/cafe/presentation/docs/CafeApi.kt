@@ -30,14 +30,13 @@ interface CafeApi {
     fun getRecommendCafes(
         @Parameter(
             description = "마지막으로 조회된 카페 ID",
-            example = "123e4567-e89b-12d3-a456-426614174000",
         )
         @RequestParam(value = "lastCafeId", required = false)
         lastCafeId: UUID?,
 
         @Parameter(
             description = "한 번에 조회할 데이터 수",
-            example = "10",
+            example = "5",
             schema = Schema(
                 minimum = SliceConstants.MIN_LIMIT.toString(),
                 defaultValue = SliceConstants.DEFAULT_LIMIT.toString(),
