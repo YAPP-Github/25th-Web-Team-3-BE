@@ -15,6 +15,7 @@ class Cafe private constructor(
     val price: Int,
     val previewImages: List<String>?,
     val mainImages: List<String>?,
+    val area: CafeArea,
 ) : AbstractDomain<Cafe, Cafe.Id>() {
     companion object {
         @JsonCreator
@@ -28,6 +29,7 @@ class Cafe private constructor(
             price: Int,
             previewImages: List<String>?,
             mainImages: List<String>?,
+            area: CafeArea,
         ): Cafe {
             return Cafe(
                 id = UUIDTypeId.from(id),
@@ -39,6 +41,7 @@ class Cafe private constructor(
                 price = price,
                 previewImages = previewImages,
                 mainImages = mainImages,
+                area = area,
             )
         }
 
@@ -52,7 +55,8 @@ class Cafe private constructor(
             price: Int,
             previewImages: List<String>?,
             mainImages: List<String>?,
-        ): Cafe = create(id, reasonForSelection, naverMapUrl, name, nearestStation, location, price, previewImages, mainImages)
+            area: CafeArea,
+        ): Cafe = create(id, reasonForSelection, naverMapUrl, name, nearestStation, location, price, previewImages, mainImages, area)
     }
 
     data class Id(override val value: UUID) : UUIDTypeId(value)
