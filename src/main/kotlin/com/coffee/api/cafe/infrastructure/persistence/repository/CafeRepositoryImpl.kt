@@ -28,7 +28,7 @@ class CafeRepositoryImpl(
     private val menuConverter: MenuConverter,
     private val tagConverter: TagConverter,
     private val entityManager: EntityManager,
-    private val jpqlRenderContext: JpqlRenderContext
+    private val jpqlRenderContext: JpqlRenderContext,
 ) : CafeRepository {
 
     override fun findAll(): List<Cafe> {
@@ -50,7 +50,7 @@ class CafeRepositoryImpl(
                     lastCafeId?.let {
                         path(CafeEntity::id).greaterThan(it)
                     },
-                    path(CafeEntity::deletedAt).isNull()
+                    path(CafeEntity::deletedAt).isNull(),
                 )
                 .orderBy(path(CafeEntity::id).asc())
         }
@@ -61,7 +61,7 @@ class CafeRepositoryImpl(
 
         val cafesWithTags = resultList.groupBy(
             { tuple -> tuple.get(0, CafeEntity::class.java) },
-            { tuple -> tuple.get(1, TagEntity::class.java) }
+            { tuple -> tuple.get(1, TagEntity::class.java) },
         ).map { (cafeEntity, tagEntities) ->
             val cafe = cafeConverter.toDomain(cafeEntity)
             val tags = tagEntities.filterNotNull()
@@ -70,14 +70,15 @@ class CafeRepositoryImpl(
             CafeInfoWithTags.of(cafe, tags)
         }.take(limit)
 
-
         val hasNext = resultList.size > limit
-        return CafePage.from(SliceImpl(
-            cafesWithTags,
-            Pageable.unpaged(), hasNext
-        ))
+        return CafePage.from(
+            SliceImpl(
+                cafesWithTags,
+                Pageable.unpaged(),
+                hasNext,
+            ),
+        )
     }
-
 
     override fun findByCafeId(cafeId: UUID?): CafeDetails {
         // CafeEntity 조회
@@ -119,6 +120,22 @@ class CafeRepositoryImpl(
         return CafeDetails.of(cafe, coffeeBean, menus, tags, updatedAt)
     }
 
+    override fun findAreas(): List<CafeArea> {
+        val query = jpql {
+            selectDistinct(path(CafeEntity::area))
+                .from(entity(CafeEntity::class))
+                .whereAnd(
+                    path(CafeEntity::deletedAt).isNull(),
+                )
+                .orderBy(path(CafeEntity::area).asc())
+        }
+
+        return entityManager
+            .createQuery(query, jpqlRenderContext)
+            .resultList
+            .toList()
+    }
+
     private fun getMenusForCafe(cafeEntity: CafeEntity): List<Menu> {
         val menuQuery = jpql {
             select(entity(MenuEntity::class))
@@ -139,7 +156,7 @@ class CafeRepositoryImpl(
                     leftFetchJoin(CafeEntity::class)
                         .on(path(CafeTagEntity::cafe).eq(entity(CafeEntity::class))),
                     leftFetchJoin(TagEntity::class)
-                        .on(path(CafeTagEntity::tags).eq(entity(TagEntity::class)))
+                        .on(path(CafeTagEntity::tags).eq(entity(TagEntity::class))),
                 )
                 .where(path(CafeTagEntity::cafe).eq(cafeEntity))
         }
