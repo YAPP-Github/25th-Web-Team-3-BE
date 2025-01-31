@@ -2,6 +2,7 @@ package com.coffee.api.cafe.presentation.adapter.controller
 
 import com.coffee.api.cafe.application.port.inbound.FindCafe
 import com.coffee.api.cafe.application.port.inbound.FindCafeDetails
+import com.coffee.api.cafe.application.port.inbound.FindRecommendCafe
 import com.coffee.api.cafe.presentation.adapter.dto.response.*
 import com.coffee.api.cafe.presentation.docs.CafeApi
 import com.coffee.api.common.support.response.ApiResponse
@@ -17,6 +18,7 @@ import java.util.UUID
 class CafeController(
     val findCafe: FindCafe,
     val findCafeDetails: FindCafeDetails,
+    val findRecommendCafe: FindRecommendCafe,
 ) : CafeApi {
 
     @GetMapping
@@ -36,15 +38,15 @@ class CafeController(
                 tags = cafe.tags.map { tag ->
                     TagResponse(
                         id = tag.id.value.toString(),
-                        name = tag.name
+                        name = tag.name,
                     )
-                }
+                },
             )
         }
 
         val response = FindAllCafesResponseWrapper(
             cafes = cafes,
-            hasNext = result.hasNext
+            hasNext = result.hasNext,
         )
 
         return ApiResponse.success(response)
@@ -53,7 +55,7 @@ class CafeController(
     @GetMapping("/details/{cafeId}")
     override fun getCafeDetails(
         @PathVariable cafeId: UUID,
-        ): ApiResponse<GetCafeDetailsResponse> {
+    ): ApiResponse<GetCafeDetailsResponse> {
         val result = findCafeDetails.invoke(FindCafeDetails.Query(cafeId))
 
         val response = GetCafeDetailsResponse(
@@ -91,12 +93,17 @@ class CafeController(
             tags = result.cafeDetails.tag.map { tag ->
                 TagResponse(
                     id = tag.id.value.toString(),
-                    name = tag.name
+                    name = tag.name,
                 )
             },
             updatedAt = result.cafeDetails.updatedAt,
         )
 
         return ApiResponse.success(response)
+    }
+
+    @GetMapping("/recommend")
+    override fun getRecommendCafes(lastCafeId: UUID?, limit: Int): ApiResponse<FindRecommendCafe.Result> {
+        return ApiResponse.success(findRecommendCafe.execute(FindRecommendCafe.Query(lastCafeId, limit)))
     }
 }
