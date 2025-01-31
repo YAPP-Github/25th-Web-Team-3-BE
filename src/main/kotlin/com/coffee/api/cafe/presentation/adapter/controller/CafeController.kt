@@ -109,10 +109,10 @@ class CafeController(
     override fun getAreas(): ApiResponse<FindCafeArea.Result> {
         val response = findCafeArea.execute(Unit)
         return ApiResponse.success(response)
+    }
 
     @GetMapping("/recommend")
     override fun getRecommendCafes(lastCafeId: UUID?, limit: Int): ApiResponse<FindRecommendCafe.Result> {
         return ApiResponse.success(findRecommendCafe.execute(FindRecommendCafe.Query(lastCafeId, limit)))
-
     }
 }
