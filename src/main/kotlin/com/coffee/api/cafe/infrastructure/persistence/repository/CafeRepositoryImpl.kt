@@ -84,11 +84,13 @@ class CafeRepositoryImpl(
                 hasNext,
             ),
         )
-        
-        return CafePage.from(SliceImpl(
+
+        return CafePage.from(
+            SliceImpl(
                 cafesWithTags,
                 Pageable.unpaged(), hasNext
-            ))
+            )
+        )
     }
 
     override fun findByCafeId(cafeId: UUID?): CafeDetails {
@@ -145,6 +147,7 @@ class CafeRepositoryImpl(
             .createQuery(query, jpqlRenderContext)
             .resultList
             .toList()
+    }
 
     override fun findAllCafesInVisibleGroups(lastGroupId: UUID?, limit: Int): CafeInfoWithRecommendGroups {
         val query = jpql {
