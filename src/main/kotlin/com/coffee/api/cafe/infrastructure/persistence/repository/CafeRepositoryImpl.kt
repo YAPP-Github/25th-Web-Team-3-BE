@@ -4,7 +4,9 @@ import com.coffee.api.cafe.application.model.CafeDetails
 import com.coffee.api.cafe.application.model.CafeInfoWithTags
 import com.coffee.api.cafe.application.model.CafePage
 import com.coffee.api.cafe.application.port.outbound.CafeRepository
+import com.coffee.api.cafe.application.port.outbound.model.CafeInfoWithRecommendGroups
 import com.coffee.api.cafe.domain.*
+import com.coffee.api.cafe.infrastructure.CafeRecommendGroupConverter
 import com.coffee.api.cafe.infrastructure.CoffeeBeanConverter
 import com.coffee.api.cafe.infrastructure.MenuConverter
 import com.coffee.api.cafe.infrastructure.TagConverter
@@ -29,6 +31,7 @@ class CafeRepositoryImpl(
     private val tagConverter: TagConverter,
     private val entityManager: EntityManager,
     private val jpqlRenderContext: JpqlRenderContext,
+    private val cafeRecommendGroupConverter: CafeRecommendGroupConverter,
 ) : CafeRepository {
 
     override fun findAll(): List<Cafe> {
@@ -81,6 +84,11 @@ class CafeRepositoryImpl(
                 hasNext,
             ),
         )
+        
+        return CafePage.from(SliceImpl(
+                cafesWithTags,
+                Pageable.unpaged(), hasNext
+            ))
     }
 
     override fun findByCafeId(cafeId: UUID?): CafeDetails {
@@ -137,6 +145,59 @@ class CafeRepositoryImpl(
             .createQuery(query, jpqlRenderContext)
             .resultList
             .toList()
+
+    override fun findAllCafesInVisibleGroups(lastGroupId: UUID?, limit: Int): CafeInfoWithRecommendGroups {
+        val query = jpql {
+            select<Tuple>(
+                entity(CafeEntity::class),
+                entity(CafeRecommendGroupEntity::class),
+            )
+                .from(
+                    entity(CafeEntity::class),
+                    leftFetchJoin(CafeRecommendGroupMappingEntity::class)
+                        .on(entity(CafeEntity::class).eq(path(CafeRecommendGroupMappingEntity::cafe))),
+                    leftFetchJoin(CafeRecommendGroupEntity::class)
+                        .on(
+                            entity(
+                                CafeRecommendGroupEntity::class,
+                            ).eq(path(CafeRecommendGroupMappingEntity::recommendGroup)),
+                        ),
+                )
+                .whereAnd(
+                    path(CafeRecommendGroupEntity::isVisible).eq(true),
+                    path(CafeEntity::deletedAt).isNull(),
+                    lastGroupId?.let {
+                        path(CafeRecommendGroupEntity::id).greaterThan(it)
+                    },
+                )
+                .orderBy(path(CafeRecommendGroupEntity::id).asc())
+        }
+
+        val queryResult = entityManager
+            .createQuery(query, jpqlRenderContext)
+            .setMaxResults(limit + 1)
+            .resultList
+
+        val groupedResults = queryResult.groupBy(
+            { tuple -> tuple.get(1, CafeRecommendGroupEntity::class.java) },
+            { tuple -> tuple.get(0, CafeEntity::class.java) },
+        )
+
+        val groups = groupedResults.map { (groupEntity, cafeEntities) ->
+            CafeInfoWithRecommendGroups.GroupedCafes(
+                group = cafeRecommendGroupConverter.toDomain(groupEntity),
+                cafes = cafeEntities.filterNotNull().map { cafeConverter.toDomain(it) },
+            )
+        }
+
+        val hasNext = queryResult.size > limit
+        val slicedGroups = if (hasNext) groups.dropLast(1) else groups
+
+        return CafeInfoWithRecommendGroups(
+            slicedGroups,
+            hasNext,
+        )
+
     }
 
     private fun getMenusForCafe(cafeEntity: CafeEntity): List<Menu> {

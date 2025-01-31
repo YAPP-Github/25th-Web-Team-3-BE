@@ -3,6 +3,7 @@ package com.coffee.api.cafe.presentation.adapter.controller
 import com.coffee.api.cafe.application.port.inbound.FindCafe
 import com.coffee.api.cafe.application.port.inbound.FindCafeArea
 import com.coffee.api.cafe.application.port.inbound.FindCafeDetails
+import com.coffee.api.cafe.application.port.inbound.FindRecommendCafe
 import com.coffee.api.cafe.presentation.adapter.dto.response.*
 import com.coffee.api.cafe.presentation.docs.CafeApi
 import com.coffee.api.common.support.response.ApiResponse
@@ -19,6 +20,7 @@ class CafeController(
     val findCafe: FindCafe,
     val findCafeDetails: FindCafeDetails,
     val findCafeArea: FindCafeArea,
+    val findRecommendCafe: FindRecommendCafe,
 ) : CafeApi {
 
     @GetMapping
@@ -107,5 +109,10 @@ class CafeController(
     override fun getAreas(): ApiResponse<FindCafeArea.Result> {
         val response = findCafeArea.execute(Unit)
         return ApiResponse.success(response)
+
+    @GetMapping("/recommend")
+    override fun getRecommendCafes(lastCafeId: UUID?, limit: Int): ApiResponse<FindRecommendCafe.Result> {
+        return ApiResponse.success(findRecommendCafe.execute(FindRecommendCafe.Query(lastCafeId, limit)))
+
     }
 }
