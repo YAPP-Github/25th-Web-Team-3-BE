@@ -5,7 +5,6 @@ import com.coffee.api.cafe.application.model.CafePage
 import com.coffee.api.cafe.domain.Cafe
 import com.coffee.api.cafe.domain.CafeArea
 import com.coffee.api.cafe.application.port.outbound.model.CafeInfoWithRecommendGroups
-import com.coffee.api.cafe.domain.Cafe
 import java.util.UUID
 
 interface CafeRepository {
