@@ -21,6 +21,7 @@ class CafeConverter : DomainEntityConverter<Cafe, CafeEntity>(
             price = entity.price,
             previewImages = entity.previewImages,
             mainImages = entity.mainImages,
+            area = entity.area,
         )
     }
 
@@ -35,6 +36,7 @@ class CafeConverter : DomainEntityConverter<Cafe, CafeEntity>(
             price = domain.price,
             previewImages = domain.previewImages ?: listOf(),
             mainImages = domain.mainImages ?: listOf(),
+            area = domain.area,
         )
     }
 }

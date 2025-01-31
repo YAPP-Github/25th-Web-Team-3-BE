@@ -39,7 +39,7 @@ class CafeRepositoryImpl(
             .map { cafeConverter.toDomain(it) }
     }
 
-    override fun findAllCafesById(lastCafeId: UUID?, limit: Int): CafePage {
+    override fun findAllCafesById(lastCafeId: UUID?, area: CafeArea?, limit: Int): CafePage {
         val query = jpql {
             select<Tuple>(entity(CafeEntity::class), entity(TagEntity::class))
                 .from(
@@ -53,7 +53,10 @@ class CafeRepositoryImpl(
                     lastCafeId?.let {
                         path(CafeEntity::id).greaterThan(it)
                     },
-                    path(CafeEntity::deletedAt).isNull()
+                    area?.let {
+                        path(CafeEntity::area).eq(it)
+                    },
+                    path(CafeEntity::deletedAt).isNull(),
                 )
                 .orderBy(path(CafeEntity::id).asc())
         }
@@ -64,7 +67,7 @@ class CafeRepositoryImpl(
 
         val cafesWithTags = resultList.groupBy(
             { tuple -> tuple.get(0, CafeEntity::class.java) },
-            { tuple -> tuple.get(1, TagEntity::class.java) }
+            { tuple -> tuple.get(1, TagEntity::class.java) },
         ).map { (cafeEntity, tagEntities) ->
             val cafe = cafeConverter.toDomain(cafeEntity)
             val tags = tagEntities.filterNotNull()
@@ -74,6 +77,14 @@ class CafeRepositoryImpl(
         }.take(limit)
 
         val hasNext = resultList.size > limit
+        return CafePage.from(
+            SliceImpl(
+                cafesWithTags,
+                Pageable.unpaged(),
+                hasNext,
+            ),
+        )
+        
         return CafePage.from(SliceImpl(
                 cafesWithTags,
                 Pageable.unpaged(), hasNext
@@ -119,6 +130,21 @@ class CafeRepositoryImpl(
         // CafeDetails 객체 생성
         return CafeDetails.of(cafe, coffeeBean, menus, tags, updatedAt)
     }
+
+    override fun findAreas(): List<CafeArea> {
+        val query = jpql {
+            selectDistinct(path(CafeEntity::area))
+                .from(entity(CafeEntity::class))
+                .whereAnd(
+                    path(CafeEntity::deletedAt).isNull(),
+                )
+                .orderBy(path(CafeEntity::area).asc())
+        }
+
+        return entityManager
+            .createQuery(query, jpqlRenderContext)
+            .resultList
+            .toList()
 
     override fun findAllCafesInVisibleGroups(lastGroupId: UUID?, limit: Int): CafeInfoWithRecommendGroups {
         val query = jpql {
@@ -171,6 +197,7 @@ class CafeRepositoryImpl(
             slicedGroups,
             hasNext,
         )
+
     }
 
     private fun getMenusForCafe(cafeEntity: CafeEntity): List<Menu> {
@@ -193,7 +220,7 @@ class CafeRepositoryImpl(
                     leftFetchJoin(CafeEntity::class)
                         .on(path(CafeTagEntity::cafe).eq(entity(CafeEntity::class))),
                     leftFetchJoin(TagEntity::class)
-                        .on(path(CafeTagEntity::tags).eq(entity(TagEntity::class)))
+                        .on(path(CafeTagEntity::tags).eq(entity(TagEntity::class))),
                 )
                 .where(path(CafeTagEntity::cafe).eq(cafeEntity))
         }

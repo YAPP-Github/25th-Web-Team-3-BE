@@ -1,5 +1,6 @@
 package com.coffee.api.cafe.infrastructure.persistence.entity
 
+import com.coffee.api.cafe.domain.CafeArea
 import com.coffee.api.common.infrastructure.persistence.BaseEntity
 import jakarta.persistence.*
 import java.util.UUID
@@ -16,6 +17,7 @@ class CafeEntity(
     price: Int,
     previewImages: List<String>,
     mainImages: List<String>,
+    area: CafeArea,
 ) : BaseEntity() {
 
     @Id
@@ -47,7 +49,7 @@ class CafeEntity(
     @CollectionTable(
         name = "cafe_preview_images",
         joinColumns = [JoinColumn(name = "cafe_id")],
-        foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT)
+        foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT),
     )
     var previewImages: List<String> = previewImages
         protected set
@@ -56,8 +58,13 @@ class CafeEntity(
     @CollectionTable(
         name = "cafe_main_images",
         joinColumns = [JoinColumn(name = "cafe_id")],
-        foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT)
+        foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT),
     )
     var mainImages: List<String> = mainImages
+        protected set
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "area", nullable = false)
+    var area: CafeArea = area
         protected set
 }

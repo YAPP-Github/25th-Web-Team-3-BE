@@ -1,6 +1,7 @@
 package com.coffee.api.cafe.presentation.adapter.controller
 
 import com.coffee.api.cafe.application.port.inbound.FindCafe
+import com.coffee.api.cafe.application.port.inbound.FindCafeArea
 import com.coffee.api.cafe.application.port.inbound.FindCafeDetails
 import com.coffee.api.cafe.application.port.inbound.FindRecommendCafe
 import com.coffee.api.cafe.presentation.adapter.dto.response.*
@@ -18,14 +19,16 @@ import java.util.UUID
 class CafeController(
     val findCafe: FindCafe,
     val findCafeDetails: FindCafeDetails,
+    val findCafeArea: FindCafeArea,
     val findRecommendCafe: FindRecommendCafe,
 ) : CafeApi {
 
     @GetMapping
     override fun findAllCafes(
         @RequestParam(value = "lastCafeId", required = false) lastCafeId: UUID?,
+        @RequestParam(value = "area", required = false) area: String?,
     ): ApiResponse<FindAllCafesResponseWrapper> {
-        val result = findCafe.invoke(FindCafe.Query(lastCafeId))
+        val result = findCafe.invoke(FindCafe.Query(lastCafeId, area))
 
         val cafes = result.cafes.map { cafe ->
             FindAllCafesResponse(
@@ -102,8 +105,14 @@ class CafeController(
         return ApiResponse.success(response)
     }
 
+    @GetMapping("/areas")
+    override fun getAreas(): ApiResponse<FindCafeArea.Result> {
+        val response = findCafeArea.execute(Unit)
+        return ApiResponse.success(response)
+
     @GetMapping("/recommend")
     override fun getRecommendCafes(lastCafeId: UUID?, limit: Int): ApiResponse<FindRecommendCafe.Result> {
         return ApiResponse.success(findRecommendCafe.execute(FindRecommendCafe.Query(lastCafeId, limit)))
+
     }
 }
