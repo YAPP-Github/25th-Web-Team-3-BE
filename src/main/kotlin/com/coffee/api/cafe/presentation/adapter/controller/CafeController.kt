@@ -77,7 +77,6 @@ class CafeController(
                 description = result.cafeDetails.coffeeBean.description,
                 name = result.cafeDetails.coffeeBean.name,
                 engName = result.cafeDetails.coffeeBean.engName,
-                imageUrl = result.cafeDetails.coffeeBean.imageUrl,
                 flavors = result.cafeDetails.coffeeBean.flavors.map { flavor ->
                     flavor.displayName
                 },
