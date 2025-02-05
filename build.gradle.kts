@@ -58,6 +58,9 @@ dependencies {
     implementation(Dependency.JDSL.JPQL_DSL)
     implementation(Dependency.JDSL.JPQL_RENDER)
     implementation(Dependency.JDSL.SPRING_DATA_JPA_SUPPORTER)
+
+    // Discord
+    implementation (Dependency.Discord.WEB_HOOK)
 }
 
 kotlin {

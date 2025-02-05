@@ -55,4 +55,10 @@ object Dependency {
         val JPQL_RENDER = "$BASE:jpql-render:$JDSL_CORE_VERSION"
         val SPRING_DATA_JPA_SUPPORTER = "$BASE:spring-data-jpa-support:$JDSL_CORE_VERSION"
     }
+
+    object Discord {
+        private const val BASE = "org.springframework.boot"
+
+        val WEB_HOOK = "$BASE:spring-boot-starter-webflux"
+    }
 }
