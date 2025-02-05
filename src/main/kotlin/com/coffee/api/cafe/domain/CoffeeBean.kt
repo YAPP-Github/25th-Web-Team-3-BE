@@ -11,9 +11,8 @@ class CoffeeBean private constructor(
     val cafe: Cafe,
     val name: String,
     val engName: String,
-    val imageUrl: String,
     val flavors: List<Flavor>,
-    val countryOfOrigin: List<String>,
+    val countryOfOrigin: MutableList<CountryOrigin>,
     val roastingPoint: RoastingPoint
 ) : AbstractDomain<CoffeeBean, CoffeeBean.Id>() {
 
@@ -25,9 +24,8 @@ class CoffeeBean private constructor(
             cafe: Cafe,
             name: String,
             engName: String,
-            imageUrl: String,
             flavors: List<Flavor>,
-            countryOfOrigin: List<String>,
+            countryOfOrigin: MutableList<CountryOrigin>,
             roastingPoint: RoastingPoint
         ): CoffeeBean {
             return CoffeeBean(
@@ -36,7 +34,6 @@ class CoffeeBean private constructor(
                 cafe = cafe,
                 name = name,
                 engName = engName,
-                imageUrl = imageUrl,
                 flavors = flavors,
                 countryOfOrigin = countryOfOrigin,
                 roastingPoint = roastingPoint
@@ -49,11 +46,10 @@ class CoffeeBean private constructor(
             cafe: Cafe,
             name: String,
             engName: String,
-            imageUrl: String,
             flavors: List<Flavor>,
-            countryOfOrigin: List<String>,
+            countryOfOrigin: MutableList<CountryOrigin>,
             roastingPoint: RoastingPoint
-        ): CoffeeBean = create(id, description, cafe, name, engName, imageUrl, flavors, countryOfOrigin, roastingPoint)
+        ): CoffeeBean = create(id, description, cafe, name, engName, flavors, countryOfOrigin, roastingPoint)
     }
 
     data class Id(override val value: UUID) : UUIDTypeId(value)

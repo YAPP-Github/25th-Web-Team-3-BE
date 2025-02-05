@@ -7,25 +7,29 @@ import java.util.UUID
 
 class Tag private constructor(
     override val id: Id,
-    val name: String
+    val name: String,
+    val imageUrl: String,
 ) : AbstractDomain<Tag, Tag.Id>() {
 
     companion object {
         @JsonCreator
         fun create(
             id: UUID,
-            name: String
+            name: String,
+            imageUrl: String?,
         ): Tag {
             return Tag(
                 id = UUIDTypeId.from(id),
-                name = name
+                name = name,
+                imageUrl = imageUrl ?: ""
             )
         }
 
         operator fun invoke(
             id: UUID,
-            name: String
-        ): Tag = create(id, name)
+            name: String,
+            imageUrl: String,
+        ): Tag = create(id, name, imageUrl)
     }
 
     data class Id(override val value: UUID) : UUIDTypeId(value)

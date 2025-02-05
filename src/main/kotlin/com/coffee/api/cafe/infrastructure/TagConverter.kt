@@ -13,14 +13,16 @@ class TagConverter : DomainEntityConverter<Tag, TagEntity>(
     override fun toDomain(entity: TagEntity): Tag {
         return Tag(
             id = entity.id,
-            name = entity.name
+            name = entity.name,
+            imageUrl = entity.imageUrl,
         )
     }
 
     override fun toEntity(domain: Tag): TagEntity {
         return TagEntity(
             id = domain.id.value,
-            name = domain.name
+            name = domain.name,
+            imageUrl = domain.imageUrl,
         )
     }
 }

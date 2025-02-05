@@ -12,6 +12,7 @@ import java.util.UUID
 class TagEntity(
     id: UUID,
     name: String,
+    imageUrl: String,
 ) : BaseEntity() {
 
     @Id
@@ -20,5 +21,8 @@ class TagEntity(
 
     @Column(nullable = false, unique = true)
     var name: String = name
+        protected set
+
+    var imageUrl: String = imageUrl
         protected set
 }

@@ -25,9 +25,8 @@ class CoffeeBeanEntity(
     cafe: CafeEntity,
     name: String,
     engName: String,
-    imageUrl: String,
     flavors: List<Flavor>,
-    countryOfOrigin: List<String>,
+    countryOfOrigin: MutableList<CountryOriginEntity>,
     roastingPoint: RoastingPoint,
 ) : BaseEntity() {
 
@@ -49,8 +48,6 @@ class CoffeeBeanEntity(
     var engName: String = engName
         protected set
 
-    var imageUrl: String = imageUrl
-        protected set
 
     @ElementCollection(targetClass = Flavor::class, fetch = FetchType.EAGER)
     @CollectionTable(
@@ -68,7 +65,7 @@ class CoffeeBeanEntity(
         joinColumns = [JoinColumn(name = "coffee_bean_id")],
         foreignKey = ForeignKey(value = ConstraintMode.NO_CONSTRAINT)
     )
-    var countryOfOrigin: List<String> = countryOfOrigin
+    var countryOfOrigin: MutableList<CountryOriginEntity> = countryOfOrigin ?: mutableListOf()
         protected set
 
     @Enumerated(EnumType.STRING)

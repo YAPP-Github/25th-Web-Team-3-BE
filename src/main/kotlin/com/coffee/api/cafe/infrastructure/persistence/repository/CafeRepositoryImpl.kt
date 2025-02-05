@@ -84,13 +84,6 @@ class CafeRepositoryImpl(
                 hasNext,
             ),
         )
-
-        return CafePage.from(
-            SliceImpl(
-                cafesWithTags,
-                Pageable.unpaged(), hasNext
-            )
-        )
     }
 
     override fun findByCafeId(cafeId: UUID?): CafeDetails {

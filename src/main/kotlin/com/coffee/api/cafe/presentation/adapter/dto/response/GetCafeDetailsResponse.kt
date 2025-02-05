@@ -7,7 +7,7 @@ data class GetCafeDetailsResponse(
     val cafe: CafeResponse,
     val coffeeBean: CoffeeBeanResponse,
     val menus: List<MenuResponse>,
-    val tags: List<TagResponse>,
+    val tags: List<DetailTagResponse>,
     @JsonFormat(pattern = "yyyy-MM-dd")
     val updatedAt: LocalDateTime,
 )
