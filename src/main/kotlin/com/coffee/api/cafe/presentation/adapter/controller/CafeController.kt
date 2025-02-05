@@ -93,9 +93,10 @@ class CafeController(
                 )
             },
             tags = result.cafeDetails.tag.map { tag ->
-                TagResponse(
+                DetailTagResponse(
                     id = tag.id.value.toString(),
                     name = tag.name,
+                    imageUrl = tag.imageUrl
                 )
             },
             updatedAt = result.cafeDetails.updatedAt,
