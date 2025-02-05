@@ -1,4 +1,4 @@
-package com.coffee.api.cafe.presentation.adapter.controller
+package com.coffee.api.cafe.presentation.adapter.`in`.restapi
 
 import com.coffee.api.cafe.application.port.inbound.FindCafe
 import com.coffee.api.cafe.application.port.inbound.FindCafeArea
