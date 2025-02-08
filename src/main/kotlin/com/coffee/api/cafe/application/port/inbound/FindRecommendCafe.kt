@@ -17,6 +17,7 @@ interface FindRecommendCafe : UseCase<FindRecommendCafe.Query, FindRecommendCafe
 
     data class CafeRecommendGroup(
         val name: String,
+        val groupId : String,
         val cafes: List<SimpleCafe>,
     )
 

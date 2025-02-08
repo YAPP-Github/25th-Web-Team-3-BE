@@ -16,6 +16,7 @@ class CafeRecommendGroupService(
         val groups = result.content.map {
             FindRecommendCafe.CafeRecommendGroup(
                 name = it.group.title,
+                groupId = it.group.id.value.toString(),
                 cafes = it.cafes.map { cafe ->
                     FindRecommendCafe.SimpleCafe(
                         id = cafe.id.value.toString(),
