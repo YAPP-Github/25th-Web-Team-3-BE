@@ -171,7 +171,6 @@ class CafeRepositoryImpl(
 
         val queryResult = entityManager
             .createQuery(query, jpqlRenderContext)
-            .setMaxResults(limit + 1)
             .resultList
 
         val groupedResults = queryResult.groupBy(
@@ -186,12 +185,12 @@ class CafeRepositoryImpl(
             )
         }
 
-        val hasNext = queryResult.size > limit
-        val slicedGroups = if (hasNext) groups.dropLast(1) else groups
+        val hasNext = groups.size > limit
+        val slicedContent = if (hasNext) groups.take(limit) else groups
 
         return CafeInfoWithRecommendGroups(
-            slicedGroups,
-            hasNext,
+            content = slicedContent,
+            hasNext = hasNext,
         )
     }
 
