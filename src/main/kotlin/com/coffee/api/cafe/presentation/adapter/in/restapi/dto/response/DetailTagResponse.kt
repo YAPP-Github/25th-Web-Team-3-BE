@@ -1,4 +1,4 @@
-package com.coffee.api.cafe.presentation.adapter.dto.response
+package com.coffee.api.cafe.presentation.adapter.`in`.restapi.dto.response
 
 class DetailTagResponse(
     val id: String,

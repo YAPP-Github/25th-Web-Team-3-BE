@@ -2,8 +2,8 @@ package com.coffee.api.cafe.presentation.docs
 
 import com.coffee.api.cafe.application.port.inbound.FindCafeArea
 import com.coffee.api.cafe.application.port.inbound.FindRecommendCafe
-import com.coffee.api.cafe.presentation.adapter.dto.response.FindAllCafesResponseWrapper
-import com.coffee.api.cafe.presentation.adapter.dto.response.GetCafeDetailsResponse
+import com.coffee.api.cafe.presentation.adapter.`in`.restapi.dto.response.FindAllCafesResponseWrapper
+import com.coffee.api.cafe.presentation.adapter.`in`.restapi.dto.response.GetCafeDetailsResponse
 import com.coffee.api.common.presentation.constant.SliceConstants
 import com.coffee.api.common.support.response.ApiResponse
 import io.swagger.v3.oas.annotations.Operation

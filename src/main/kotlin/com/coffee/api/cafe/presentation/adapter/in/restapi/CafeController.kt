@@ -4,7 +4,7 @@ import com.coffee.api.cafe.application.port.inbound.FindCafe
 import com.coffee.api.cafe.application.port.inbound.FindCafeArea
 import com.coffee.api.cafe.application.port.inbound.FindCafeDetails
 import com.coffee.api.cafe.application.port.inbound.FindRecommendCafe
-import com.coffee.api.cafe.presentation.adapter.dto.response.*
+import com.coffee.api.cafe.presentation.adapter.`in`.restapi.dto.response.*
 import com.coffee.api.cafe.presentation.docs.CafeApi
 import com.coffee.api.common.support.response.ApiResponse
 import org.springframework.web.bind.annotation.GetMapping
