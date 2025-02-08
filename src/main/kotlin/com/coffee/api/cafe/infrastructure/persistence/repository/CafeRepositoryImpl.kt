@@ -193,7 +193,6 @@ class CafeRepositoryImpl(
             slicedGroups,
             hasNext,
         )
-
     }
 
     private fun getMenusForCafe(cafeEntity: CafeEntity): List<Menu> {

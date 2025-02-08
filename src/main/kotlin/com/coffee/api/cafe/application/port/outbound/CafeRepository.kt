@@ -12,5 +12,5 @@ interface CafeRepository {
     fun findAllCafesById(lastCafeId: UUID?, area: CafeArea?, limit: Int): CafePage
     fun findByCafeId(cafeId: UUID?): CafeDetails
     fun findAreas(): List<CafeArea>
-    fun findAllCafesInVisibleGroups(lastCafeId: UUID?, limit: Int): CafeInfoWithRecommendGroups
+    fun findAllCafesInVisibleGroups(lastGroupId: UUID?, limit: Int): CafeInfoWithRecommendGroups
 }

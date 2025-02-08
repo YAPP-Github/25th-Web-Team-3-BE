@@ -112,7 +112,7 @@ class CafeController(
     }
 
     @GetMapping("/recommend")
-    override fun getRecommendCafes(lastCafeId: UUID?, limit: Int): ApiResponse<FindRecommendCafe.Result> {
-        return ApiResponse.success(findRecommendCafe.execute(FindRecommendCafe.Query(lastCafeId, limit)))
+    override fun getRecommendCafes(lastGroupId: UUID?, limit: Int): ApiResponse<FindRecommendCafe.Result> {
+        return ApiResponse.success(findRecommendCafe.execute(FindRecommendCafe.Query(lastGroupId, limit)))
     }
 }

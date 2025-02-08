@@ -41,13 +41,13 @@ interface CafeApi {
     @Operation(summary = "카페 추천 조회", description = "그룹화된 카페 추천을 조회합니다.")
     fun getRecommendCafes(
         @Parameter(
-            description = "마지막으로 조회된 카페 ID",
+            description = "마지막으로 조회된 추천 카페 그룹 ID",
         )
-        @RequestParam(value = "lastCafeId", required = false)
-        lastCafeId: UUID?,
+        @RequestParam(value = "lastGroupId", required = false)
+        lastGroupId: UUID?,
 
         @Parameter(
-            description = "한 번에 조회할 데이터 수",
+            description = "한 번에 조회할 추천 카페 그룹 수",
             example = "5",
             schema = Schema(
                 minimum = SliceConstants.MIN_LIMIT.toString(),
