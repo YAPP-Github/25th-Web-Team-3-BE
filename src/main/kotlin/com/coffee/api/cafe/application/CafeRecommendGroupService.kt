@@ -11,11 +11,12 @@ class CafeRecommendGroupService(
     private val cafeRepository: CafeRepository,
 ) : FindRecommendCafe {
     override fun execute(input: FindRecommendCafe.Query): FindRecommendCafe.Result {
-        val result = cafeRepository.findAllCafesInVisibleGroups(input.lastCafeId, input.limit)
+        val result = cafeRepository.findAllCafesInVisibleGroups(input.lastGroupId, input.limit)
 
         val groups = result.content.map {
             FindRecommendCafe.CafeRecommendGroup(
                 name = it.group.title,
+                groupId = it.group.id.value.toString(),
                 cafes = it.cafes.map { cafe ->
                     FindRecommendCafe.SimpleCafe(
                         id = cafe.id.value.toString(),

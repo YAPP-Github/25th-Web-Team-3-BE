@@ -6,7 +6,7 @@ import java.util.*
 interface FindRecommendCafe : UseCase<FindRecommendCafe.Query, FindRecommendCafe.Result> {
 
     data class Query(
-        val lastCafeId: UUID?,
+        val lastGroupId: UUID?,
         val limit: Int,
     )
 
@@ -17,6 +17,7 @@ interface FindRecommendCafe : UseCase<FindRecommendCafe.Query, FindRecommendCafe
 
     data class CafeRecommendGroup(
         val name: String,
+        val groupId : String,
         val cafes: List<SimpleCafe>,
     )
 
