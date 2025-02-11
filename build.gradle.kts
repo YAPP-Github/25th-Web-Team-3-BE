@@ -44,6 +44,7 @@ dependencies {
 
     // Test
     testRuntimeOnly(Dependency.Test.JUNIT_PLATFORM)
+    testImplementation(Dependency.Test.MOCKK)
 
     // Database
     runtimeOnly(Dependency.Database.MYSQL_CONNECTOR)

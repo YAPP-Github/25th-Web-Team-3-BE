@@ -27,11 +27,13 @@ object Dependency {
 
     object Test {
         private const val JUNIT_VERSION = "1.10.2"
+        private const val MOCKK_VERSION = "1.13.9"
 
         private const val BASE = "org.junit.platform"
         fun junit(name: String) = "$BASE:$name:$JUNIT_VERSION"
 
         val JUNIT_PLATFORM = junit("junit-platform-launcher")
+        val MOCKK = "io.mockk:mockk:$MOCKK_VERSION"
     }
 
     object Database {

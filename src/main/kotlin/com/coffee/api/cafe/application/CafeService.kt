@@ -17,6 +17,13 @@ class CafeService(
             CafeArea.entries.find { it.name == code }
         }
 
+        if (query.area != null && area == null) {
+            return FindCafe.Result(
+                cafes = emptyList(),
+                hasNext = false
+            )
+        }
+
         val cafePage = cafeRepository.findAllCafesById(
             lastCafeId = query.lastCafeId,
             area = area,
