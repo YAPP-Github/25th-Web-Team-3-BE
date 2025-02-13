@@ -78,7 +78,10 @@ class CafeController(
                 name = result.cafeDetails.coffeeBean.name,
                 engName = result.cafeDetails.coffeeBean.engName,
                 flavors = result.cafeDetails.coffeeBean.flavors.map { flavor ->
-                    flavor.displayName
+                    FlavorResponse(
+                        flavor.displayName,
+                        flavor.category
+                    )
                 },
                 countryOfOrigin = result.cafeDetails.coffeeBean.countryOfOrigin,
                 roastingPoint = result.cafeDetails.coffeeBean.roastingPoint.toString(),

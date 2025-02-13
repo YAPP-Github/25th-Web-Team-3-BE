@@ -7,7 +7,7 @@ data class CoffeeBeanResponse(
     val description: String,
     val name: String,
     val engName: String,
-    val flavors: List<String>,
+    val flavors: List<FlavorResponse>,
     val countryOfOrigin: MutableList<CountryOrigin>,
     val roastingPoint: String,
 )
