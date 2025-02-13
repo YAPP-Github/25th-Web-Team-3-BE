@@ -72,6 +72,7 @@ class CafeRepositoryImpl(
             val cafe = cafeConverter.toDomain(cafeEntity)
             val tags = tagEntities.filterNotNull()
                 .map { tagConverter.toDomain(it) }
+                .sortedBy { it.name }
 
             CafeInfoWithTags.of(cafe, tags)
         }.take(limit)
@@ -223,5 +224,6 @@ class CafeRepositoryImpl(
             .createQuery(tagQuery, jpqlRenderContext)
             .resultList
             .map { tagConverter.toDomain(it) }
+            .sortedBy { it.name }
     }
 }
