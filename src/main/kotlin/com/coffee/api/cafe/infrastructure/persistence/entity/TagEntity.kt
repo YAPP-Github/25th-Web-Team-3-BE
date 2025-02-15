@@ -13,6 +13,7 @@ class TagEntity(
     id: UUID,
     name: String,
     imageUrl: String,
+    priority: Float,
 ) : BaseEntity() {
 
     @Id
@@ -24,5 +25,8 @@ class TagEntity(
         protected set
 
     var imageUrl: String = imageUrl
+        protected set
+
+    var priority: Float = priority
         protected set
 }
