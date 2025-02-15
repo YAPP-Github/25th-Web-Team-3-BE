@@ -5,7 +5,10 @@ import com.coffee.api.cafe.application.model.CafeInfoWithTags
 import com.coffee.api.cafe.application.model.CafePage
 import com.coffee.api.cafe.application.port.outbound.CafeRepository
 import com.coffee.api.cafe.application.port.outbound.model.CafeInfoWithRecommendGroups
-import com.coffee.api.cafe.domain.*
+import com.coffee.api.cafe.domain.Cafe
+import com.coffee.api.cafe.domain.CafeArea
+import com.coffee.api.cafe.domain.Menu
+import com.coffee.api.cafe.domain.Tag
 import com.coffee.api.cafe.infrastructure.CafeRecommendGroupConverter
 import com.coffee.api.cafe.infrastructure.CoffeeBeanConverter
 import com.coffee.api.cafe.infrastructure.MenuConverter
@@ -72,7 +75,7 @@ class CafeRepositoryImpl(
             val cafe = cafeConverter.toDomain(cafeEntity)
             val tags = tagEntities.filterNotNull()
                 .map { tagConverter.toDomain(it) }
-                .sortedBy { it.name }
+                .sortedBy { it.priority }
 
             CafeInfoWithTags.of(cafe, tags)
         }.take(limit)
@@ -224,6 +227,6 @@ class CafeRepositoryImpl(
             .createQuery(tagQuery, jpqlRenderContext)
             .resultList
             .map { tagConverter.toDomain(it) }
-            .sortedBy { it.name }
+            .sortedBy { it.priority }
     }
 }

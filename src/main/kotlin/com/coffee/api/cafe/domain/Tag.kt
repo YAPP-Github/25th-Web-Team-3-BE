@@ -9,6 +9,7 @@ class Tag private constructor(
     override val id: Id,
     val name: String,
     val imageUrl: String,
+    val priority: Float,
 ) : AbstractDomain<Tag, Tag.Id>() {
 
     companion object {
@@ -17,11 +18,13 @@ class Tag private constructor(
             id: UUID,
             name: String,
             imageUrl: String?,
+            priority: Float
         ): Tag {
             return Tag(
                 id = UUIDTypeId.from(id),
                 name = name,
-                imageUrl = imageUrl ?: ""
+                imageUrl = imageUrl ?: "",
+                priority = priority
             )
         }
 
@@ -29,7 +32,8 @@ class Tag private constructor(
             id: UUID,
             name: String,
             imageUrl: String,
-        ): Tag = create(id, name, imageUrl)
+            priority: Float
+        ): Tag = create(id, name, imageUrl, priority)
     }
 
     data class Id(override val value: UUID) : UUIDTypeId(value)

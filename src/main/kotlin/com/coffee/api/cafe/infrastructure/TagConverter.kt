@@ -15,6 +15,7 @@ class TagConverter : DomainEntityConverter<Tag, TagEntity>(
             id = entity.id,
             name = entity.name,
             imageUrl = entity.imageUrl,
+            priority = entity.priority,
         )
     }
 
@@ -23,6 +24,7 @@ class TagConverter : DomainEntityConverter<Tag, TagEntity>(
             id = domain.id.value,
             name = domain.name,
             imageUrl = domain.imageUrl,
+            priority = domain.priority,
         )
     }
 }
