@@ -104,7 +104,7 @@ body:
       required: true
       
   - type: input
-    id: origins
+    id: blends
     attributes:
       label: 싱글/블렌드 여부
       description: 싱글 블렌드 여부를 작성해주세요
