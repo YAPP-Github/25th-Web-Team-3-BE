@@ -102,6 +102,15 @@ body:
       placeholder: "초콜릿, 견과류, 달콤함"
     validations:
       required: true
+      
+  - type: input
+    id: origins
+    attributes:
+      label: 싱글/블렌드 여부
+      description: 싱글 블렌드 여부를 작성해주세요
+      placeholder: "싱글, 블렌드"
+    validations:
+      required: true
 
   - type: input
     id: origins
