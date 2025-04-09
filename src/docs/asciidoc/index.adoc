@@ -1,0 +1,15 @@
+ifndef::snippets[]
+:snippets: ../../build/generated-snippets
+endif::[]
+= Coffee REST API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc:left
+:toclevels: 2
+:sectlinks:
+
+[[Cafe-API]]
+== Cafe API
+
+include::api/cafe/cafe.adoc[]
