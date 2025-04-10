@@ -21,7 +21,6 @@ class CoffeeBeanTest {
         val countryOfOrigin = mutableListOf(createCountryOfOrigin())
         val roastingPoint = RoastingPoint.LIGHT
 
-
         // when
         val coffeeBean = CoffeeBean(
             id = id,
