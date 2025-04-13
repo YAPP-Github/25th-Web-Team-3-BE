@@ -1,0 +1,6 @@
+// [[cafe-]]
+=== 카페 조회
+
+=== HTTP Request
+
+=== HTTP Response

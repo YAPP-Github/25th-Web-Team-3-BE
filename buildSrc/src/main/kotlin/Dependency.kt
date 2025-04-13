@@ -13,6 +13,7 @@ object Dependency {
         val BOOT_STARTER_JPA = starter("-data-jpa")
         val BOOT_STARTER_ACTUATOR = starter("-actuator")
         val SPRINGDOC = "org.springdoc:springdoc-openapi-starter-webmvc-ui:$SPRINGDOC_VERSION"
+        val RESTDOCS_MOCKMVC = "org.springframework.restdocs:spring-restdocs-mockmvc"
     }
 
     object Kotlin {
@@ -28,12 +29,16 @@ object Dependency {
     object Test {
         private const val JUNIT_VERSION = "1.10.2"
         private const val MOCKK_VERSION = "1.13.9"
+        private const val KOTEST_RUNNER_VERSION = "5.8.0"
+        private const val KOTEST_ASSERTIONS_CORE_VERSION = "5.9.0"
 
         private const val BASE = "org.junit.platform"
         fun junit(name: String) = "$BASE:$name:$JUNIT_VERSION"
 
         val JUNIT_PLATFORM = junit("junit-platform-launcher")
         val MOCKK = "io.mockk:mockk:$MOCKK_VERSION"
+        val KOTEST_RUNNER = "io.kotest:kotest-runner-junit5:$KOTEST_RUNNER_VERSION"
+        val KOTEST_ASSERTIONS_CORE = "io.kotest:kotest-assertions-core:$KOTEST_ASSERTIONS_CORE_VERSION"
     }
 
     object Database {

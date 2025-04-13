@@ -1,3 +1,5 @@
+import org.asciidoctor.gradle.jvm.AsciidoctorTask
+
 plugins {
     kotlin("jvm") version Plugin.KOTLIN_JVM.version
     kotlin("plugin.spring") version Plugin.KOTLIN_SPRING.version
@@ -9,6 +11,7 @@ plugins {
     id(Plugin.OPENAPI.id) version Plugin.OPENAPI.version
     id(Plugin.ECLIPSE_APT.id) version Plugin.ECLIPSE_APT.version
     id(Plugin.KTLINT.id) version Plugin.KTLINT.version
+    id(Plugin.ASCIIDOCTOR.id) version Plugin.ASCIIDOCTOR.version
 }
 
 allOpen {
@@ -23,6 +26,14 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+}
+
+configurations {
+    getByName("compileOnly") {
+        extendsFrom(configurations["annotationProcessor"])
+    }
+
+    create("asciidoctorExt")
 }
 
 repositories {
@@ -46,6 +57,10 @@ dependencies {
     testRuntimeOnly(Dependency.Test.JUNIT_PLATFORM)
     testImplementation(Dependency.Test.MOCKK)
 
+    // Kotest
+    testImplementation(Dependency.Test.KOTEST_RUNNER)
+    testImplementation(Dependency.Test.KOTEST_ASSERTIONS_CORE)
+
     // Database
     runtimeOnly(Dependency.Database.MYSQL_CONNECTOR)
 
@@ -54,6 +69,8 @@ dependencies {
 
     // Docs
     implementation(Dependency.Spring.SPRINGDOC)
+    add("asciidoctorExt", "org.springframework.restdocs:spring-restdocs-asciidoctor")
+    testImplementation(Dependency.Spring.RESTDOCS_MOCKMVC)
 
     // JDSL
     implementation(Dependency.JDSL.JPQL_DSL)
@@ -70,10 +87,33 @@ kotlin {
     }
 }
 
-tasks.withType<Test> {
+tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 
 tasks.withType<org.jmailen.gradle.kotlinter.tasks.LintTask> {
     enabled = false
+}
+
+val snippetsDir = file("build/generated-snippets")
+
+tasks.test {
+    outputs.dir(snippetsDir)
+}
+
+tasks.named<AsciidoctorTask>("asciidoctor") {
+    inputs.dir(snippetsDir)
+    configurations("asciidoctorExt")
+    sources {
+        include("**/index.adoc")
+    }
+    baseDirFollowsSourceFile()
+    dependsOn(tasks.test)
+}
+
+tasks.bootJar {
+    dependsOn(tasks.named<AsciidoctorTask>("asciidoctor"))
+    from(tasks.named<AsciidoctorTask>("asciidoctor").get().outputDir) {
+        into("static/docs")
+    }
 }
