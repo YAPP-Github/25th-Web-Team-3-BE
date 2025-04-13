@@ -11,7 +11,7 @@ plugins {
     id(Plugin.OPENAPI.id) version Plugin.OPENAPI.version
     id(Plugin.ECLIPSE_APT.id) version Plugin.ECLIPSE_APT.version
     id(Plugin.KTLINT.id) version Plugin.KTLINT.version
-    id("org.asciidoctor.jvm.convert") version "3.3.2"
+    id(Plugin.ASCIIDOCTOR.id) version Plugin.ASCIIDOCTOR.version
 }
 
 allOpen {
@@ -58,8 +58,8 @@ dependencies {
     testImplementation(Dependency.Test.MOCKK)
 
     // Kotest
-    testImplementation("io.kotest:kotest-runner-junit5:5.8.0")
-    testImplementation("io.kotest:kotest-assertions-core:5.9.0")
+    testImplementation(Dependency.Test.KOTEST_RUNNER)
+    testImplementation(Dependency.Test.KOTEST_ASSERTIONS_CORE)
 
     // Database
     runtimeOnly(Dependency.Database.MYSQL_CONNECTOR)
@@ -70,7 +70,7 @@ dependencies {
     // Docs
     implementation(Dependency.Spring.SPRINGDOC)
     add("asciidoctorExt", "org.springframework.restdocs:spring-restdocs-asciidoctor")
-    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testImplementation(Dependency.Spring.RESTDOCS_MOCKMVC)
 
     // JDSL
     implementation(Dependency.JDSL.JPQL_DSL)

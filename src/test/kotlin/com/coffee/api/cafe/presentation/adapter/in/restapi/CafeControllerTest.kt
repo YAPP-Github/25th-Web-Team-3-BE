@@ -94,6 +94,7 @@ class CafeControllerTest : ControllerTestSupport() {
 
         val result = FindCafeDetails.Result(dummyCafeDetails)
 
+        // stubbing
         every { findCafeDetails.invoke(any()) } returns result
 
         // when // then
