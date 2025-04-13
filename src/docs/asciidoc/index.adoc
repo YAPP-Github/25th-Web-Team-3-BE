@@ -9,7 +9,4 @@ endif::[]
 :toclevels: 2
 :sectlinks:
 
-[[Cafe-API]]
-== Cafe API
-
-include::api/cafe/cafe.adoc[]
+include::./api/cafe/cafe.adoc[]

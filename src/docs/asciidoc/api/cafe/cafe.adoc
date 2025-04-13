@@ -1,6 +1,22 @@
-// [[cafe-]]
-=== 카페 조회
+[[findAllCafes-API]]
+=== 모든 카페 조회
 
-=== HTTP Request
+==== HTTP Request
+include::{snippets}/cafe-findAll/http-request.adoc[]
+include::{snippets}/cafe-findAll/query-parameters.adoc[]
 
-=== HTTP Response
+==== HTTP Response
+include::{snippets}/cafe-findAll/http-response.adoc[]
+include::{snippets}/cafe-findAll/response-fields.adoc[]
+
+
+[[getCafeDetails-API]]
+=== 카페 상세 조회
+
+==== HTTP Request
+include::{snippets}/cafe-details/http-request.adoc[]
+include::{snippets}/cafe-details/path-parameters.adoc[]
+
+==== HTTP Response
+include::{snippets}/cafe-details/http-response.adoc[]
+include::{snippets}/cafe-details/response-fields.adoc[]
