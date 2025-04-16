@@ -2,6 +2,7 @@ object Dependency {
     object Spring {
         private val VERSION = Plugin.SPRING_BOOT.version
         private const val SPRINGDOC_VERSION = "2.0.2"
+        private const val RESTDOCS_MOCKMVC_VERSION = "1.1.0.RELEASE"
 
         private const val BASE = "org.springframework.boot"
         fun starter(name: String = "") = "$BASE:spring-boot-starter$name:$VERSION"
@@ -13,7 +14,7 @@ object Dependency {
         val BOOT_STARTER_JPA = starter("-data-jpa")
         val BOOT_STARTER_ACTUATOR = starter("-actuator")
         val SPRINGDOC = "org.springdoc:springdoc-openapi-starter-webmvc-ui:$SPRINGDOC_VERSION"
-        val RESTDOCS_MOCKMVC = "org.springframework.restdocs:spring-restdocs-mockmvc"
+        val RESTDOCS_MOCKMVC = "org.springframework.restdocs:spring-restdocs-mockmvc:$RESTDOCS_MOCKMVC_VERSION"
     }
 
     object Kotlin {
