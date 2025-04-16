@@ -2,7 +2,7 @@ object Dependency {
     object Spring {
         private val VERSION = Plugin.SPRING_BOOT.version
         private const val SPRINGDOC_VERSION = "2.0.2"
-        private const val RESTDOCS_MOCKMVC_VERSION = "2.7.0.RELEASE"
+        private const val RESTDOCS_MOCKMVC_VERSION = "3.0.3"
 
         private const val BASE = "org.springframework.boot"
         fun starter(name: String = "") = "$BASE:spring-boot-starter$name:$VERSION"
