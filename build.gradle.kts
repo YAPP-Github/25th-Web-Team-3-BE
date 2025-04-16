@@ -101,7 +101,7 @@ tasks.test {
     outputs.dir(snippetsDir)
 }
 
-tasks.named<AsciidoctorTask>("asciidoctor") {
+tasks.named<AsciidoctorTask>("asciidoctor").configure {
     inputs.dir(snippetsDir)
     configurations("asciidoctorExt")
     sources {
