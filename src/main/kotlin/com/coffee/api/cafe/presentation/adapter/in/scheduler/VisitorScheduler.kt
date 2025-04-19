@@ -3,6 +3,7 @@ package com.coffee.api.cafe.presentation.adapter.`in`.scheduler
 import com.coffee.api.cafe.application.port.outbound.VisitorRepository
 import com.coffee.api.cafe.infrastructure.persistence.entity.VisitorEntity
 import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Profile
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
