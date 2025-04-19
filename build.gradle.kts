@@ -78,7 +78,10 @@ dependencies {
     implementation(Dependency.JDSL.SPRING_DATA_JPA_SUPPORTER)
 
     // Discord
-    implementation (Dependency.Discord.WEB_HOOK)
+    implementation(Dependency.Discord.WEB_HOOK)
+
+    // Redis
+    implementation(Dependency.Redis.STARTER_DATA)
 }
 
 kotlin {

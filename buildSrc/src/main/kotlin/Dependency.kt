@@ -69,4 +69,11 @@ object Dependency {
 
         val WEB_HOOK = "$BASE:spring-boot-starter-webflux"
     }
+
+    object Redis {
+        private const val REDIS_VERSION = "2.7.7"
+        private const val BASE = "org.springframework.boot"
+
+        val STARTER_DATA = "$BASE:spring-boot-starter-data-redis:$REDIS_VERSION"
+    }
 }
