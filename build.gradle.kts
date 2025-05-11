@@ -79,6 +79,12 @@ dependencies {
 
     // Discord
     implementation (Dependency.Discord.WEB_HOOK)
+
+    // Actuator
+    implementation (Dependency.Spring.ACTUATOR)
+
+    // Prometheus
+    implementation (Dependency.Spring.PROMETHEUS)
 }
 
 kotlin {
@@ -116,4 +122,8 @@ tasks.bootJar {
     from(tasks.named<AsciidoctorTask>("asciidoctor").get().outputDir) {
         into("static/docs")
     }
+}
+
+springBoot {
+    buildInfo()
 }

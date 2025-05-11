@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
-@RestControllerAdvice
+@RestControllerAdvice(
+    basePackages = ["com.coffee.api.cafe.presentation.adapter.in.restapi"]
+)
 @io.swagger.v3.oas.annotations.Hidden
 class ApiControllerAdvice(
     private val discordClientAdapter: DiscordClientAdapter
