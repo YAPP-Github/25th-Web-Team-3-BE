@@ -3,6 +3,7 @@ package com.coffee.api.cafe.application
 import com.coffee.api.cafe.application.port.inbound.FindCafe
 import com.coffee.api.cafe.application.port.outbound.CafeRepository
 import com.coffee.api.cafe.domain.CafeArea
+import io.micrometer.core.annotation.Counted
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -12,6 +13,7 @@ class CafeService(
     private val cafeRepository: CafeRepository,
 ) : FindCafe {
 
+    @Counted(value = "cafe.find", description = "Number of times cafe list is requested")
     override fun invoke(query: FindCafe.Query): FindCafe.Result {
         val area = query.area?.let { code ->
             CafeArea.entries.find { it.name == code }

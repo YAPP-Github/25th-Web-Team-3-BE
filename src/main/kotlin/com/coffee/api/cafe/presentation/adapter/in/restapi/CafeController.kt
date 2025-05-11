@@ -8,6 +8,7 @@ import com.coffee.api.cafe.presentation.adapter.`in`.restapi.dto.response.*
 import com.coffee.api.cafe.presentation.adapter.`in`.restapi.mapper.FindAllCafesResponseMapper
 import com.coffee.api.cafe.presentation.adapter.`in`.restapi.mapper.GetCafeDetailsResponseMapper
 import com.coffee.api.cafe.presentation.docs.CafeApi
+import com.coffee.api.common.aop.PageViewed
 import com.coffee.api.common.support.response.ApiResponse
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -25,6 +26,7 @@ class CafeController(
     val findRecommendCafe: FindRecommendCafe,
 ) : CafeApi {
 
+    @PageViewed("cafe_list")
     @GetMapping
     override fun findAllCafes(
         @RequestParam(value = "lastCafeId", required = false) lastCafeId: UUID?,
@@ -35,6 +37,7 @@ class CafeController(
         return ApiResponse.success(response)
     }
 
+    @PageViewed("cafe_details")
     @GetMapping("/details/{cafeId}")
     override fun getCafeDetails(
         @PathVariable cafeId: UUID,
@@ -44,12 +47,14 @@ class CafeController(
         return ApiResponse.success(response)
     }
 
+    @PageViewed("areas")
     @GetMapping("/areas")
     override fun getAreas(): ApiResponse<FindCafeArea.Result> {
         val response = findCafeArea.execute(Unit)
         return ApiResponse.success(response)
     }
 
+    @PageViewed("cafe_recommend")
     @GetMapping("/recommend")
     override fun getRecommendCafes(lastGroupId: UUID?, limit: Int): ApiResponse<FindRecommendCafe.Result> {
         return ApiResponse.success(findRecommendCafe.execute(FindRecommendCafe.Query(lastGroupId, limit)))

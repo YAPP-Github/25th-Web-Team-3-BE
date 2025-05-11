@@ -15,6 +15,8 @@ object Dependency {
         val BOOT_STARTER_ACTUATOR = starter("-actuator")
         val SPRINGDOC = "org.springdoc:springdoc-openapi-starter-webmvc-ui:$SPRINGDOC_VERSION"
         val RESTDOCS_MOCKMVC = "org.springframework.restdocs:spring-restdocs-mockmvc:$RESTDOCS_MOCKMVC_VERSION"
+        val ACTUATOR = "$BASE:spring-boot-starter-actuator"
+        val PROMETHEUS = "io.micrometer:micrometer-registry-prometheus"
     }
 
     object Kotlin {
